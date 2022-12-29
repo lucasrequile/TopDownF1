@@ -2,11 +2,11 @@ package be.lucasrequile.topdownf1;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Car;
-import model.Direction;
 import view.GameView;
 
 public class GameFXMLController {
@@ -18,39 +18,49 @@ public class GameFXMLController {
     private URL location;
 
     @FXML
-    private AnchorPane anchorpane;
+    private AnchorPane gamePane;
 
     Car model;
     GameView view;
+    private int period = 100;
     @FXML
     void initialize() {
-        model = new Car(0,0,Direction.RIGHT);
+        model = new Car(0,0,0,10,0);
         view = new GameView(model);
         
-        anchorpane.getChildren().add(view);
+        gamePane.getChildren().addAll(view);
 
-        anchorpane.setOnKeyPressed(this::move);
+        gamePane.setOnKeyPressed(this::move);
+        view.setFocusTraversable(true);
+        MoveCar moveCarModel = new MoveCar(model,this);
+        Timer t = new Timer(true);
+        t.scheduleAtFixedRate(moveCarModel, 0, period);
+        update();
     }
 
-    private void move(KeyEvent k) {
+    public void move(KeyEvent k) {
         switch(k.getCode()){ //switch-case is een snellere manier van een if
             case LEFT:
-                model.setDirection(Direction.LEFT);
+                model.left();
                 break;
             case RIGHT:
-                model.setDirection(Direction.RIGHT);
+                model.right();
                 break;
             case UP:
-                model.setDirection(Direction.UP);
+                model.up();
                 break;
             case DOWN:
-                model.setDirection(Direction.DOWN);
+                model.down();
                 break;
         }
+        update();
     }
 
     void update() {
         view.update();
     }
 
+    public int getPeriod() {
+        return period;
+    }
 }

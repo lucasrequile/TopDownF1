@@ -4,41 +4,78 @@
  */
 package model;
 
+import be.lucasrequile.topdownf1.GameFXMLController;
+import be.lucasrequile.topdownf1.MoveCar;
+
 /**
  *
  * @author lucas
  */
 public class Car {
-    private double x = 10;
-    private double y = 10;
-    private Direction direction;
+    private double x = 0;
+    private double y = 0;
+    private double speed =0;
+    private double acceleration = 10; //acceleratie in m/s² (F1)
+    private double deceleration = -60; //deceleratie in m/s² (F1)
+    private double degrees = 0;
 
-    public Car(double x, double y, Direction direction) {
+    public Car(double x, double y, double speed, double acceleration, double degrees) {
         this.x = x;
         this.y = y;
-        this.direction = direction;
+        this.speed = speed;
+        this.degrees = degrees;
     }
     
     public void resetCar(){
         x = y = 0;
     }
     
-    public void tick(){
-        switch(direction){
-            case UP:
-                y--;
-                break;
-            case DOWN:
-                y++;
-                break;
-            case LEFT:
-                x--;
-                break;
-            case RIGHT:
-                x++;    
-                break;
+    public void up(){
+        speed = speed + acceleration*.1;;
+    }
+    public void down(){
+        if(speed >0){
+        speed = speed + deceleration*.1;
+        }else{
+            speed = 0;
         }
     }
+    public void left(){
+        degrees = degrees - 5;
+    }
+    public void right(){
+        degrees = degrees + 5;
+    }
+
+public void position(){
+        double rad = Math.toRadians(degrees);
+        double speedX= speed*Math.cos(rad);
+        double speedY= speed*Math.sin(rad);
+        
+        x=x+speedX;
+        y=y+speedY;
+        System.out.println(degrees + ", " + rad + ", " + speedX + ", " + speedY);
+        System.out.println(x + ", " + y);
+        
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    public double getDegrees() {
+        return degrees;
+    }
+
+    public void setDegrees(double degrees) {
+        this.degrees = degrees;
+    }
+    
+    
 
     public double getX() {
         return x;
@@ -55,12 +92,4 @@ public class Car {
     public void setY(double y) {
         this.y = y;
     }
-
-    public Direction getDirection() {
-        return direction;
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
-    }    
 }

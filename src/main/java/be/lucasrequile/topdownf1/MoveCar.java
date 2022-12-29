@@ -22,7 +22,7 @@ public class MoveCar extends TimerTask {
     }
     
     public void run(){
-        model.tick();
+        model.position();
         Platform.runLater(controller::update);
     }
 }

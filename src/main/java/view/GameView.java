@@ -16,24 +16,21 @@ import model.Car;
 public class GameView extends Region{
     private Car model;
     private AnchorPane anchorPane;
+    private double x;
+    private double y;
     
     public GameView(Car model) {
         this.model = model;
-        
         anchorPane = new AnchorPane();
-        
-        Rectangle rectangle = new Rectangle(model.getX(),model.getY(),10,10);
-        anchorPane.getChildren().addAll(rectangle);
-        
+        Rectangle rectangle = new Rectangle(0,0,10,10);
+        anchorPane.getChildren().add(rectangle);
         update();
     }
     public void update(){
-        double x = model.getX();
-        double y = model.getY();
-        
-        anchorPane.setTranslateX(x);
-        anchorPane.setTranslateY(y);
-        
+        getChildren().clear();
+        anchorPane.setTranslateX(model.getX());
+        anchorPane.setTranslateY(model.getY());
+        getChildren().addAll(anchorPane);
     }
     
 }
