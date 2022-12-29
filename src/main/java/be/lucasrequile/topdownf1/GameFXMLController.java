@@ -30,7 +30,7 @@ public class GameFXMLController {
     
     @FXML
     void initialize() {
-        model = new Car(0,0,0,10,0,period);
+        model = new Car(0,0,0,0);
         view = new GameView(model);
         
         gamePane.getChildren().addAll(view);
@@ -39,6 +39,7 @@ public class GameFXMLController {
         gamePane.setOnKeyReleased(this::keyReleased);
         view.setFocusTraversable(true);
         MoveCar moveCarModel = new MoveCar(model,this);
+        
         Timer t = new Timer(true);
         t.scheduleAtFixedRate(moveCarModel, 0, period);
         update();
@@ -54,11 +55,9 @@ public class GameFXMLController {
                 break;
             case RIGHT:
                 model.right();
-                isGasPressed = false;
                 break;
             case LEFT:
                 model.left();
-                isGasPressed = false;
                 break;
         }
         move();
@@ -78,11 +77,10 @@ public class GameFXMLController {
     public void move(){
         if(isGasPressed==false){
                 model.nothingPressed();
-                System.out.println("niks");
                 update();
         }
         else{
-            switch(keyVar){ //switch-case is een snellere manier van een if
+            switch(keyVar){
                     case UP:
                         model.accelerate();
                         break;

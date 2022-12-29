@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package view;
 
 import javafx.scene.layout.AnchorPane;
@@ -22,7 +18,7 @@ public class GameView extends Region{
     public GameView(Car model) {
         this.model = model;
         anchorPane = new AnchorPane();
-        Rectangle rectangle = new Rectangle(0,0,10,10);
+        Rectangle rectangle = new Rectangle(0,0,1,1);
         anchorPane.getChildren().add(rectangle);
         update();
     }
