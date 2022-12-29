@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import javafx.fxml.FXML;
-import javafx.scene.input.KeyCode;
 import static javafx.scene.input.KeyCode.DOWN;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -25,9 +24,7 @@ public class GameFXMLController {
 
     Car model;
     GameView view;
-    private int period = 100;
     private boolean isGasPressed = false;
-    private KeyCode keyVar = DOWN;
     
     @FXML
     void initialize() {
@@ -42,7 +39,7 @@ public class GameFXMLController {
         MoveCar moveCarModel = new MoveCar(model,this);
         
         Timer t = new Timer(true);
-        t.scheduleAtFixedRate(moveCarModel, 0, period);
+        t.scheduleAtFixedRate(moveCarModel, 0, 30);
         update();
     }
 
@@ -64,7 +61,6 @@ public class GameFXMLController {
                 break;
         }
         update();
-        keyVar = k.getCode();
     }
     public void keyReleased(KeyEvent k){
         switch(k.getCode()){
@@ -74,7 +70,6 @@ public class GameFXMLController {
                 isGasPressed = false;
         }
         update();
-        keyVar = k.getCode();
     }
     
     public void gasCheck(){
@@ -85,9 +80,6 @@ public class GameFXMLController {
     }
     public void update() {
         view.update();
-    }
-    public int getPeriod() {
-        return period;
     }
     public boolean isKeyPressed(){
         return isGasPressed;

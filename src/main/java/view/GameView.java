@@ -18,7 +18,7 @@ public class GameView extends Region{
     public GameView(Car model) {
         this.model = model;
         anchorPane = new AnchorPane();
-        Rectangle rectangle = new Rectangle(0,0,1,1);
+        Rectangle rectangle = new Rectangle(0,0,10,10);
         anchorPane.getChildren().add(rectangle);
         update();
     }

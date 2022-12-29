@@ -1,11 +1,7 @@
 package model;
-
-import be.lucasrequile.topdownf1.GameFXMLController;
-import be.lucasrequile.topdownf1.MoveCar;
-
 /**
  *
- * @author lucas
+ * @author Lucas Requilé
  */
 public class Car {
     private double x = 0;
@@ -14,7 +10,7 @@ public class Car {
     private double topSpeed = 85; //top-speed of F1 car (m/s)
     private double acceleration = 12; //acceleratie in m/s² (F1)
     private double deceleration = -60; //deceleratie in m/s² (F1)
-    private double bulgeOutDeceleration = -10; //uitbolsnelheid in m/s;
+    private double bulgeOutDeceleration = -5; //uitbolsnelheid in m/s;
     private double degrees = 0;
     private double pixelToMeterRatio = 1;
     
