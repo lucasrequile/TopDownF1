@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import javafx.fxml.FXML;
+import javafx.scene.input.KeyCode;
+import static javafx.scene.input.KeyCode.DOWN;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Car;
@@ -23,14 +25,18 @@ public class GameFXMLController {
     Car model;
     GameView view;
     private int period = 100;
+    private boolean isGasPressed = false;
+    private KeyCode keyVar = DOWN;
+    
     @FXML
     void initialize() {
-        model = new Car(0,0,0,10,0);
+        model = new Car(0,0,0,10,0,period);
         view = new GameView(model);
         
         gamePane.getChildren().addAll(view);
 
-        gamePane.setOnKeyPressed(this::move);
+        gamePane.setOnKeyPressed(this::keyPressed);
+        gamePane.setOnKeyReleased(this::keyReleased);
         view.setFocusTraversable(true);
         MoveCar moveCarModel = new MoveCar(model,this);
         Timer t = new Timer(true);
@@ -38,29 +44,62 @@ public class GameFXMLController {
         update();
     }
 
-    public void move(KeyEvent k) {
-        switch(k.getCode()){ //switch-case is een snellere manier van een if
-            case LEFT:
-                model.left();
+    public void keyPressed(KeyEvent k) {
+        switch(k.getCode()){
+            case UP:
+                isGasPressed = true;
+                break;
+            case DOWN:
+                isGasPressed = true;
                 break;
             case RIGHT:
                 model.right();
+                isGasPressed = false;
                 break;
-            case UP:
-                model.up();
-                break;
-            case DOWN:
-                model.down();
+            case LEFT:
+                model.left();
+                isGasPressed = false;
                 break;
         }
-        update();
+        move();
+        keyVar = k.getCode();
     }
-
-    void update() {
+    public void keyReleased(KeyEvent k){
+        switch(k.getCode()){
+            case UP:
+                isGasPressed = false;
+            case DOWN:
+                isGasPressed = false;
+        }
+        move();
+        keyVar = k.getCode();
+    }
+    
+    public void move(){
+        if(isGasPressed==false){
+                model.nothingPressed();
+                System.out.println("niks");
+                update();
+        }
+        else{
+            switch(keyVar){ //switch-case is een snellere manier van een if
+                    case UP:
+                        model.accelerate();
+                        break;
+                    case DOWN:
+                        model.decelerate();
+                        break;
+                }
+            update();
+        }
+    }
+    public void update() {
         view.update();
     }
-
     public int getPeriod() {
         return period;
+    }
+    public boolean isKeyPressed(){
+        return isGasPressed;
     }
 }
