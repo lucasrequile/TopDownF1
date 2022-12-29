@@ -21,43 +21,45 @@ public class Car {
     private double elapsedTime;
     private long startTime;
     private long endTime;
+    private CarState carState;
 
-    public Car(double x, double y, double speed, double degrees) {
+    public Car(double x, double y, double speed, double degrees, CarState carState) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.degrees = degrees;
+        this.carState = carState;
     }
     
     public void resetCar(){
         x = y = 0;
     }
     
-    public void accelerate(){
-        speed = Math.min(speed + acceleration*elapsedTime, topSpeed);
-        /* stel dat de stappen van acceleratie groter zijn dan de topSpeed, zal hij gewoon de topSpeed kiezen ipv de berekening */
-    }
-    public void decelerate(){
-        speed = Math.max(speed + deceleration*elapsedTime, 0);
-        /*in plaats van een if, zorgt Math.max ervoor dat wanneer de decelleratie groter is dan de acceleratie 
-        de snelheid toch niet negatief kan worden. Hij neemt de grootste van beide waarden terug, dus v kan nooit <0 zijn.*/
-    }
-    public void left(){
-        if(speed>0){
-            degrees = degrees - 3;
-        }else{
+    public void movement(CarState carState){
+        switch(carState){
+            case NOTHING:
+                speed = Math.max(speed + bulgeOutDeceleration*elapsedTime, 0);
+                break;
+            case ACCELERATING:
+                speed = Math.min(speed + acceleration*elapsedTime, topSpeed);
+                break;
+            case DECELERATING:
+                speed = Math.max(speed + deceleration*elapsedTime, 0);
+                break;
+            case RIGHT:
+                if(speed>0){
+                degrees = degrees + 3;
+                }else{}
+                break;
+            case LEFT:
+                if(speed>0){
+                degrees = degrees - 3;
+                }else{}
+                break;
         }
     }
-    public void right(){
-        if(speed>0){
-        degrees = degrees + 3;
-        }else{}
-    }
-    public void nothingPressed(){
-        speed = Math.max(speed + bulgeOutDeceleration*elapsedTime, 0);
-    }
-
 public void position(){
+        movement(carState);
         double rad = Math.toRadians(degrees);
         double speedX= speed*Math.cos(rad);
         double speedY= speed*Math.sin(rad);
@@ -106,4 +108,13 @@ public void position(){
     public void setY(double y) {
         this.y = y;
     }
+
+    public CarState getCarState() {
+        return carState;
+    }
+
+    public void setCarState(CarState carState) {
+        this.carState = carState;
+    }
+    
 }

@@ -9,6 +9,7 @@ import static javafx.scene.input.KeyCode.DOWN;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Car;
+import model.CarState;
 import view.GameView;
 
 public class GameFXMLController {
@@ -30,7 +31,7 @@ public class GameFXMLController {
     
     @FXML
     void initialize() {
-        model = new Car(0,0,0,0);
+        model = new Car(0,0,0,0,CarState.NOTHING);
         view = new GameView(model);
         
         gamePane.getChildren().addAll(view);
@@ -49,18 +50,20 @@ public class GameFXMLController {
         switch(k.getCode()){
             case UP:
                 isGasPressed = true;
+                model.setCarState(CarState.ACCELERATING);
                 break;
             case DOWN:
                 isGasPressed = true;
+                model.setCarState(CarState.DECELERATING);
                 break;
             case RIGHT:
-                model.right();
+                model.setCarState(CarState.RIGHT);
                 break;
             case LEFT:
-                model.left();
+                model.setCarState(CarState.LEFT);
                 break;
         }
-        move();
+        update();
         keyVar = k.getCode();
     }
     public void keyReleased(KeyEvent k){
@@ -70,25 +73,14 @@ public class GameFXMLController {
             case DOWN:
                 isGasPressed = false;
         }
-        move();
+        update();
         keyVar = k.getCode();
     }
     
-    public void move(){
+    public void gasCheck(){
         if(isGasPressed==false){
-                model.nothingPressed();
+                model.setCarState(CarState.NOTHING);
                 update();
-        }
-        else{
-            switch(keyVar){
-                    case UP:
-                        model.accelerate();
-                        break;
-                    case DOWN:
-                        model.decelerate();
-                        break;
-                }
-            update();
         }
     }
     public void update() {
