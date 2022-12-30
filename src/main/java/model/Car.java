@@ -5,6 +5,8 @@ package model;
  */
 public class Car {
     //car-based vars
+    private int width = 2;
+    private int length = 5;
     private double x = 0;
     private double y = 0;
     private double degrees = 0;
@@ -22,7 +24,9 @@ public class Car {
     private long endTime;
     
 
-    public Car(double x, double y, double degrees, double topSpeed, double acceleration,double deceleration,double bulgeOutDeceleration,GasState gasState, SteerState steerState) {
+    public Car(double x, double y, double degrees, int width, int length, double topSpeed, double acceleration,double deceleration,double bulgeOutDeceleration,GasState gasState, SteerState steerState) {
+        this.width = width;
+        this.length = length;        
         this.x = x;
         this.y = y;
         this.degrees = degrees;
@@ -58,12 +62,12 @@ public class Car {
         switch(steerState){
             case RIGHT:
                 if(speed>0){
-                degrees = degrees + 3;
+                degrees = degrees + 2;
                 }else{}
                 break;
             case LEFT:
                 if(speed>0){
-                degrees = degrees - 3;
+                degrees = degrees - 2;
                 }else{}
                 break;
         }
@@ -86,6 +90,15 @@ public void position(){
         System.out.println(x + ", " + y);
         System.out.println(speed*3.6 + " km/h");
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
 
     public double getSpeed() {
         return speed;
