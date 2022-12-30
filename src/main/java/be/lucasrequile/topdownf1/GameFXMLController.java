@@ -8,7 +8,8 @@ import static javafx.scene.input.KeyCode.DOWN;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Car;
-import model.CarState;
+import model.GasState;
+import model.SteerState;
 import view.GameView;
 
 public class GameFXMLController {
@@ -25,10 +26,11 @@ public class GameFXMLController {
     Car model;
     GameView view;
     private boolean isGasPressed = false;
+    private boolean isSteered = false;
     
     @FXML
     void initialize() {
-        model = new Car(0,0,0,0,CarState.NOTHING);
+        model = new Car(0,0,0,GasState.IDLE, SteerState.IDLE);
         view = new GameView(model);
         
         gamePane.getChildren().addAll(view);
@@ -36,7 +38,7 @@ public class GameFXMLController {
         gamePane.setOnKeyPressed(this::keyPressed);
         gamePane.setOnKeyReleased(this::keyReleased);
         view.setFocusTraversable(true);
-        MoveCar moveCarModel = new MoveCar(model,this);
+        CarTimer moveCarModel = new CarTimer(model,this);
         
         Timer t = new Timer(true);
         t.scheduleAtFixedRate(moveCarModel, 0, 30);
@@ -47,17 +49,17 @@ public class GameFXMLController {
         switch(k.getCode()){
             case UP:
                 isGasPressed = true;
-                model.setCarState(CarState.ACCELERATING);
+                model.setGasState(GasState.ACCELERATING);
                 break;
             case DOWN:
                 isGasPressed = true;
-                model.setCarState(CarState.DECELERATING);
+                model.setGasState(GasState.DECELERATING);
                 break;
             case RIGHT:
-                model.setCarState(CarState.RIGHT);
+                model.setSteerState(SteerState.RIGHT);
                 break;
             case LEFT:
-                model.setCarState(CarState.LEFT);
+                model.setSteerState(SteerState.LEFT);
                 break;
         }
         update();
@@ -68,14 +70,22 @@ public class GameFXMLController {
                 isGasPressed = false;
             case DOWN:
                 isGasPressed = false;
+            case LEFT:
+                isSteered = false;
+            case RIGHT:
+                isSteered = false;
         }
         update();
     }
     
-    public void gasCheck(){
+    public void gasSteerCheck(){
         if(isGasPressed==false){
-                model.setCarState(CarState.NOTHING);
-                update();
+            model.setGasState(GasState.IDLE);
+            update();
+        }
+        if(isSteered == false){
+            model.setSteerState(SteerState.IDLE);
+            update();
         }
     }
     public void update() {

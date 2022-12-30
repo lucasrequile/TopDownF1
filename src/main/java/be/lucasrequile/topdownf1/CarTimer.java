@@ -8,17 +8,17 @@ import model.Car;
  *
  * @author lucas
  */
-public class MoveCar extends TimerTask {
+public class CarTimer extends TimerTask {
     private Car model;
     private GameFXMLController controller;
 
-    public MoveCar(Car model, GameFXMLController controller) {
+    public CarTimer(Car model, GameFXMLController controller) {
         this.model = model;
         this.controller = controller;
     }
     
     public void run(){
-        Platform.runLater(controller::gasCheck);
+        Platform.runLater(controller::gasSteerCheck);
         model.position();
         Platform.runLater(controller::update);
     }

@@ -8,6 +8,6 @@ package model;
  *
  * @author lucas
  */
-public enum CarState {
-    ACCELERATING,DECELERATING,NOTHING,LEFT,RIGHT;
+public enum GasState {
+    ACCELERATING,DECELERATING,IDLE;
 }

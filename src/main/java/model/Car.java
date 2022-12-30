@@ -17,23 +17,27 @@ public class Car {
     private double elapsedTime;
     private long startTime;
     private long endTime;
-    private CarState carState;
+    private GasState gasState;
+    private SteerState steerState;
 
-    public Car(double x, double y, double speed, double degrees, CarState carState) {
+    public Car(double x, double y, double degrees, GasState gasState, SteerState steerState) {
         this.x = x;
         this.y = y;
-        this.speed = speed;
         this.degrees = degrees;
-        this.carState = carState;
+        this.gasState = gasState;
+        this.steerState = steerState;
+        /*this.acceleration = acceleration;
+        this.deceleration = deceleration;
+        this.bulgeOutDeceleration = bulgeOutDeceleration;*/
     }
     
     public void resetCar(){
         x = y = 0;
     }
     
-    public void movement(CarState carState){
-        switch(carState){
-            case NOTHING:
+    public void gas(GasState gasState){
+        switch(gasState){
+            case IDLE:
                 speed = Math.max(speed + bulgeOutDeceleration*elapsedTime, 0);
                 break;
             case ACCELERATING:
@@ -42,6 +46,10 @@ public class Car {
             case DECELERATING:
                 speed = Math.max(speed + deceleration*elapsedTime, 0);
                 break;
+        }
+    }
+    public void steer(SteerState steerState){
+        switch(steerState){
             case RIGHT:
                 if(speed>0){
                 degrees = degrees + 3;
@@ -55,7 +63,8 @@ public class Car {
         }
     }
 public void position(){
-        movement(carState);
+        gas(gasState);
+        steer(steerState);
         double rad = Math.toRadians(degrees);
         double speedX= speed*Math.cos(rad);
         double speedY= speed*Math.sin(rad);
@@ -64,7 +73,7 @@ public void position(){
         long elapsedTimeMilliSec = endTime - startTime;
         elapsedTime = (double)elapsedTimeMilliSec/1000;
         startTime = endTime;
-        System.out.println("elapsed time = "+elapsedTime);
+        //System.out.println("elapsed time = "+elapsedTime);
         
         x=x+speedX*elapsedTime;
         y=y+speedY*elapsedTime;
@@ -105,12 +114,20 @@ public void position(){
         this.y = y;
     }
 
-    public CarState getCarState() {
-        return carState;
+    public GasState getGasState() {
+        return gasState;
     }
 
-    public void setCarState(CarState carState) {
-        this.carState = carState;
+    public void setGasState(GasState gasState) {
+        this.gasState = gasState;
     }
-    
+
+    public SteerState getSteerState() {
+        return steerState;
+    }
+
+    public void setSteerState(SteerState steerState) {
+        this.steerState = steerState;
+    }
+   
 }
