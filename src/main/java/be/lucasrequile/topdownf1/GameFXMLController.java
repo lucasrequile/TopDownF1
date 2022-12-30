@@ -6,6 +6,7 @@ import java.util.Timer;
 import javafx.fxml.FXML;
 import static javafx.scene.input.KeyCode.DOWN;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Car;
 import model.GasState;
@@ -30,12 +31,13 @@ public class GameFXMLController {
     
     @FXML
     void initialize() {
-        model = new Car(0,0,0,GasState.IDLE, SteerState.IDLE);
+        model = new Car(0,0,0,85,12,-60, -5,GasState.IDLE, SteerState.IDLE);
         view = new GameView(model);
         
         gamePane.getChildren().addAll(view);
 
         gamePane.setOnKeyPressed(this::keyPressed);
+        gamePane.setOnMouseClicked(this::reset);
         gamePane.setOnKeyReleased(this::keyReleased);
         view.setFocusTraversable(true);
         CarTimer moveCarModel = new CarTimer(model,this);
@@ -93,5 +95,9 @@ public class GameFXMLController {
     }
     public boolean isKeyPressed(){
         return isGasPressed;
+    }
+
+    private void reset(MouseEvent m) {
+        model.resetCar();
     }
 }

@@ -4,35 +4,41 @@ package model;
  * @author Lucas Requilé
  */
 public class Car {
+    //car-based vars
     private double x = 0;
     private double y = 0;
+    private double degrees = 0;
     private double speed =0;
     private double topSpeed = 85; //top-speed of F1 car (m/s)
     private double acceleration = 12; //acceleratie in m/s² (F1)
     private double deceleration = -60; //deceleratie in m/s² (F1)
     private double bulgeOutDeceleration = -5; //uitbolsnelheid in m/s;
-    private double degrees = 0;
-    private double pixelToMeterRatio = 1;
+    private GasState gasState;
+    private SteerState steerState;
     
+    //time-based vars
     private double elapsedTime;
     private long startTime;
     private long endTime;
-    private GasState gasState;
-    private SteerState steerState;
+    
 
-    public Car(double x, double y, double degrees, GasState gasState, SteerState steerState) {
+    public Car(double x, double y, double degrees, double topSpeed, double acceleration,double deceleration,double bulgeOutDeceleration,GasState gasState, SteerState steerState) {
         this.x = x;
         this.y = y;
         this.degrees = degrees;
+        //set-once vars
+        this.topSpeed = topSpeed;
+        this.acceleration = acceleration;
+        this.deceleration = deceleration;
+        this.bulgeOutDeceleration = bulgeOutDeceleration;
         this.gasState = gasState;
         this.steerState = steerState;
-        /*this.acceleration = acceleration;
-        this.deceleration = deceleration;
-        this.bulgeOutDeceleration = bulgeOutDeceleration;*/
     }
     
     public void resetCar(){
-        x = y = 0;
+        x = y = speed = degrees =  0;
+        gasState = GasState.IDLE;
+        steerState = SteerState.IDLE;
     }
     
     public void gas(GasState gasState){
@@ -73,7 +79,6 @@ public void position(){
         long elapsedTimeMilliSec = endTime - startTime;
         elapsedTime = (double)elapsedTimeMilliSec/1000;
         startTime = endTime;
-        //System.out.println("elapsed time = "+elapsedTime);
         
         x=x+speedX*elapsedTime;
         y=y+speedY*elapsedTime;
