@@ -35,5 +35,11 @@ public class GameView extends Region{
         anchorPane.setRotate(model.getDegrees());
         getChildren().addAll(anchorPane);
     }
+
+    public static int getSIZE() {
+        return SIZE;
+    }
+    
+    
     
 }
