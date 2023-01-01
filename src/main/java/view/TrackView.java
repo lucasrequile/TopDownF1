@@ -15,27 +15,26 @@ public class TrackView extends Region{
     private TrackModel model;
     private GameView gameView;
     private AnchorPane anchorPane;
+    public final static int SIZE = 5;
 
     public TrackView(TrackModel model) {
         this.model = model;
         anchorPane = new AnchorPane();
-        Rectangle rectangle = new Rectangle(1,1,10,10);
-        anchorPane.getChildren().addAll(rectangle);
         update();
     }
     
     public void drawRoad(int x,int y){
-        Rectangle rectangle = new Rectangle(x, y, 1,1);
+        Rectangle rectangle = new Rectangle(x*SIZE, y*SIZE, SIZE,SIZE);
         rectangle.setFill(Color.BLACK);
         anchorPane.getChildren().addAll(rectangle);
     }
     public void drawGrass(int x,int y){
-        Rectangle rectangle = new Rectangle(x, y, 1,1);
+        Rectangle rectangle = new Rectangle(x*SIZE, y*SIZE, SIZE,SIZE);
         rectangle.setFill(Color.GREEN);
         anchorPane.getChildren().addAll(rectangle);
     }
     public void drawBorder(int x,int y){
-        Rectangle rectangle = new Rectangle(x, y, 1,1);
+        Rectangle rectangle = new Rectangle(x*SIZE, y*SIZE, SIZE,SIZE);
         rectangle.setFill(Color.RED);
         anchorPane.getChildren().addAll(rectangle);
     }

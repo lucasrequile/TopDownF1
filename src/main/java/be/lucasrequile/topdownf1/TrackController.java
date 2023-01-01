@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javafx.scene.layout.AnchorPane;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  *
@@ -37,10 +38,11 @@ public class TrackController {
         
         //ook de volgende 5 regels komen van ChatGPT
         try{
-            loadTrack("src/main/resources/json/image_array.json");
+            loadTrack("src/main/resources/json/image_array_small.json");
         } catch(IOException e){
             e.printStackTrace();
         }
+        //vanaf hier eigen code
         int[][] trackLayout = model.getTrackLayout();
         
         for(int i = 0; i < trackLayout.length; i++){
@@ -66,8 +68,23 @@ public class TrackController {
         // Deserialize the byte array to a two-dimensional array of integers
         ObjectMapper mapper = new ObjectMapper();
         int[][] trackLayout = mapper.readValue(data, int[][].class);
-
+        
+        
         // Set the track layout in the model
-        model.setTrackLayout(trackLayout);
+        model.setTrackLayout(rotateMatrixLeft(trackLayout));
   }
+    public int[][] rotateMatrixLeft(int[][] matrix)
+    {
+        /* W and H are already swapped */
+        int w = matrix.length;
+        int h = matrix[0].length;   
+        int[][] ret = new int[h][w];
+        for (int i = 0; i < h; ++i) {
+            for (int j = 0; j < w; ++j) {
+                ret[i][j] = matrix[j][h - i - 1];
+            }
+        }
+        ArrayUtils.reverse(ret);
+        return ret;
+    }
 }
