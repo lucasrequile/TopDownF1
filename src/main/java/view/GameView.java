@@ -17,7 +17,7 @@ public class GameView extends Region{
     private AnchorPane anchorPane;
     private double x;
     private double y;
-    public final static int SIZE = 10;
+    public final static int SIZE = 5;
     
     public GameView(Car model) {
         this.model = model;

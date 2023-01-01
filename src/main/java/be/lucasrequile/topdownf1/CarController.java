@@ -13,7 +13,7 @@ import model.GasState;
 import model.SteerState;
 import view.GameView;
 
-public class GameFXMLController {
+public class CarController {
 
     @FXML
     private ResourceBundle resources;
