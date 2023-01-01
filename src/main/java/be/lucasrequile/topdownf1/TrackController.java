@@ -1,18 +1,25 @@
 package be.lucasrequile.topdownf1;
 
+
+import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import model.TrackModel;
 import view.TrackView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javafx.scene.layout.AnchorPane;
 
 /**
- *
+ * src/main/resources/json/image_array.json
  * @author Lucas Requilé
  */
 public class TrackController {
@@ -30,44 +37,56 @@ public class TrackController {
     
     @FXML
     void initialize() {
+        // Create the model and view
         model = new TrackModel();
         view = new TrackView(model);
         
+        // Add the view to the track pane
         trackPane.getChildren().addAll(view);
         
-        //ook de volgende 5 regels komen van ChatGPT
-        try{
-            loadTrack("src\\main\\resources\\json\\image_array.json");
-        } catch(IOException e){
+        // Load the track layout from the JSON file
+        try {
+            loadTrack("src/main/resources/bin/image_array.bin");
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        int[][] trackLayout = model.getTrackLayout();
         
-        for(int i = 0; i < trackLayout.length; i++){
-            for(int j = 0; j < trackLayout[i].length; j++){
-                if(trackLayout[i][j]==0){
-                    view.drawGrass(i,j);
-                }
-                if(trackLayout[i][j]==1){
+        // Draw the track using the track layout
+        int[][] trackLayout = model.getTrackLayout();
+        for (int i = 0; i < trackLayout.length; i++) {
+            for (int j = 0; j < trackLayout[i].length; j++) {
+                if (trackLayout[i][j] == 0) {
+                    view.drawGrass(i, j);
+                } else if (trackLayout[i][j] == 1) {
                     view.drawRoad(i, j);
-                }
-                if(trackLayout[i][j]==2){
-                    view.drawBorder(i,j);
+                } else if (trackLayout[i][j] == 2) {
+                    view.drawBorder(i, j);
                 }
             }
         }
     }
 
-    //methode loadTrack is niet zelf geschreven, maar geholpen door ChatGPT - OpenAI. Hiermee wordt een JSON file omgezet naar een 2D-Array. 
-    public void loadTrack(String fileName) throws IOException {
-        // Read the contents of the file into a byte array
-        byte[] data = Files.readAllBytes(Paths.get(fileName));
+public void loadTrack(String fileName) throws IOException {
+    // Initialize the track layout array
+    int[][] trackLayout = null;
 
-        // Deserialize the byte array to a two-dimensional array of integers
-        ObjectMapper mapper = new ObjectMapper();
-        int[][] trackLayout = mapper.readValue(data, int[][].class);
+    // Open the binary file for reading
+    try (DataInputStream dis = new DataInputStream(new FileInputStream(fileName))) {
+        // Read the number of rows and columns
+        int numRows = dis.readInt();
+        int numCols = dis.readInt();
+        trackLayout = new int[numRows][numCols];
 
-        // Set the track layout in the model
-        model.setTrackLayout(trackLayout);
-  }
+        // Read the data from the file, one row at a time
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                trackLayout[i][j] = dis.readUnsignedByte();
+            }
+        }
+    }
+
+    // Set the track layout in the model
+    model.setTrackLayout(trackLayout);
+}
+
 }
