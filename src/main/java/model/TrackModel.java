@@ -14,11 +14,10 @@ public class TrackModel {
     private int[][] trackLayout;
     TrackView view;
 
-    public TrackModel(int[][] trackLayout) {
-        this.trackLayout = trackLayout;
+    public TrackModel() {
     }
     
-    public void drawTrack(){
+    /*public void drawTrack(){
         for(int i = 0; i < trackLayout.length; i++){
             for(int j = 0; j < trackLayout[i].length; j++){
                 if(trackLayout[i][j]==1){
@@ -26,7 +25,7 @@ public class TrackModel {
                 }
             }
         }
-    }
+    }*/
     public int[][] getTrackLayout() {
         return trackLayout;
     }
