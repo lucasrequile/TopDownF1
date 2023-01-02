@@ -6,6 +6,9 @@ package view;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import model.Car;
 
 /**
  *
@@ -14,12 +17,21 @@ import javafx.scene.layout.Region;
 public class GameView extends Region {
     private AnchorPane anchorPane;
     public final static int SIZE = 5;
+    Car model;
 
-    public GameView() {
+    public GameView(Car model) {
+        this.model = model;
         anchorPane = new AnchorPane();
+        Rectangle rectangle = new Rectangle(10*SIZE,10*SIZE,SIZE,SIZE);
+        rectangle.setFill(Color.ORANGE);
+        anchorPane.getChildren().add(rectangle);
     }
     
     public void update(){
+        getChildren().clear();
+        anchorPane.setTranslateX(model.getX()*SIZE);
+        anchorPane.setTranslateY(model.getY()*SIZE);
+        getChildren().addAll(anchorPane);
     }
 
     public static int getSIZE() {

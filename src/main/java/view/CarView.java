@@ -3,8 +3,6 @@ package view;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import model.Car;
 
@@ -24,8 +22,6 @@ public class CarView extends Region{
         this.model = model;
         anchorPane = new AnchorPane();
         Rectangle rectangle = new Rectangle(0,0,model.getLength()*size,model.getWidth()*size);
-        /*Circle circle1 = new Circle(model.getLength()*SIZE-SIZE, model.getWidth()*SIZE/4, SIZE/2,Color.RED);
-        Circle circle2 = new Circle(model.getLength()*SIZE-SIZE, model.getWidth()*3*SIZE/4, SIZE/2,Color.RED);*/
         rectangle.setFill(Color.GREEN);
         anchorPane.getChildren().addAll(rectangle/*,circle1,circle2*/);
         update();

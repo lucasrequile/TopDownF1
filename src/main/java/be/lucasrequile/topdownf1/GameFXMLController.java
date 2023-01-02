@@ -39,10 +39,10 @@ public class GameFXMLController {
     
     @FXML
     void initialize() {
-        trackModel = new TrackModel(0,0);
+        trackModel = new TrackModel(338,666);
         carModel = new Car(0,0,0,2,5,85,12,-60, -5,GasState.IDLE, SteerState.IDLE);
         
-        view = new GameView();
+        view = new GameView(carModel);
         
         carView = new CarView(carModel);
         trackView = new TrackView(trackModel);
@@ -56,7 +56,7 @@ public class GameFXMLController {
         CarTimer moveCarModel = new CarTimer(carModel,this);
         
         Timer t = new Timer(true);
-        t.scheduleAtFixedRate(moveCarModel, 0, 30);
+        t.scheduleAtFixedRate(moveCarModel, 0, 20);
         update();
     }
 
