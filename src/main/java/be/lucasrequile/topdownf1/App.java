@@ -17,7 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("carFXML"), 600, 400);
+        scene = new Scene(loadFXML("gameFXML"), 1200, 800);
         stage.setScene(scene);
         //stage.setFullScreen(true);
         stage.show();

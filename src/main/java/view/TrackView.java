@@ -7,7 +7,7 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.StrokeType;
 import model.TrackModel;
-import view.GameView;
+import view.CarView;
 
 /**
  *
@@ -15,9 +15,9 @@ import view.GameView;
  */
 public class TrackView extends Region{
     private TrackModel model;
-    private GameView gameView;
     private AnchorPane anchorPane;
-    public final static int SIZE = 5;
+    private GameView gameView;
+    private int size = gameView.getSIZE();
     
 
     public TrackView(TrackModel model) {
@@ -34,8 +34,8 @@ public class TrackView extends Region{
         /*svgTrack.setLayoutX(565);
         svgTrack.setLayoutY(465);*/
         
-        svgTrack.setScaleX(SIZE);
-        svgTrack.setScaleY(SIZE);
+        svgTrack.setScaleX(size);
+        svgTrack.setScaleY(size);
         
         anchorPane.getChildren().addAll(svgTrack);
 
@@ -45,8 +45,8 @@ public class TrackView extends Region{
 
     public void update(){
         getChildren().clear();
-        anchorPane.setTranslateX(model.getX()*SIZE);
-        anchorPane.setTranslateY(model.getY()*SIZE);
+        anchorPane.setTranslateX(model.getX()*size);
+        anchorPane.setTranslateY(model.getY()*size);
         getChildren().addAll(anchorPane);
     }
 }

@@ -10,9 +10,9 @@ import model.Car;
  */
 public class CarTimer extends TimerTask {
     private Car model;
-    private CarController controller;
+    private GameFXMLController controller;
 
-    public CarTimer(Car model, CarController controller) {
+    public CarTimer(Car model, GameFXMLController controller) {
         this.model = model;
         this.controller = controller;
     }
