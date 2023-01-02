@@ -16,7 +16,7 @@ import model.Car;
  */
 public class GameView extends Region {
     private AnchorPane anchorPane;
-    public final static int SIZE = 5;
+    public final static int SIZE = 3;
     Car model;
 
     public GameView(Car model) {

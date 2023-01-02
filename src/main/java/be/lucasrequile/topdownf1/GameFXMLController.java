@@ -39,7 +39,7 @@ public class GameFXMLController {
     
     @FXML
     void initialize() {
-        trackModel = new TrackModel(338,666);
+        trackModel = new TrackModel(670.7,917.4);
         carModel = new Car(0,0,0,2,5,85,12,-60, -5,GasState.IDLE, SteerState.IDLE);
         
         view = new GameView(carModel);
