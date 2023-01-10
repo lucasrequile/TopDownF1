@@ -9,7 +9,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import model.Car;
+import model.GameModel;
 import model.GasState;
 import model.SteerState;
 import model.TrackModel;
@@ -27,27 +29,50 @@ public class GameFXMLController {
     @FXML
     private AnchorPane gamePane;
     
+    @FXML
+    private AnchorPane specPane;
+
+    @FXML
+    private Text lapTimeText;
+
+    @FXML
+    private Text speedText;
+
+    @FXML
+    private Text staticTextLapTime;
+
+    @FXML
+    private Text staticTextSpeed;
+    
+    @FXML
+    private Text staticTextLap;
+    
+    @FXML
+    private Text lapText;
     
     TrackModel trackModel;
     Car carModel;
+    GameModel gameModel;
     GameView view;
     
     TrackView trackView;
     
     private boolean isGasPressed = false;
     private boolean isSteered = false;
+    private int size;
     
     @FXML
     void initialize() {
         trackModel = new TrackModel(670.7,917.4);
-        carModel = new Car(0,0,0,2,5,85,12,-60, -5,GasState.IDLE, SteerState.IDLE);
+        carModel = new Car(0,0,180,2,5,85,12,-60, -5,GasState.IDLE, SteerState.IDLE);
+        gameModel = new GameModel(carModel);
         
         trackView = new TrackView(trackModel);
         AnchorPane grassPane = new AnchorPane();
         Image forestImg = new Image("grass.png");
         
-        for(int i = -2000; i<3000; i=i+288){ //*size nog toevoegen
-            for(int j =-2000; j<1500; j=j+160){
+        for(int i = -5000; i<5000; i=i+288){ //*size nog toevoegen
+            for(int j =-7000; j<1500; j=j+160){
                 ImageView forest = new ImageView(forestImg);
                 forest.setTranslateX(i);
                 forest.setTranslateY(j);
@@ -59,13 +84,13 @@ public class GameFXMLController {
         view = new GameView(carModel, trackPane);
         
         
-        gamePane.getChildren().addAll(view);
+        gamePane.getChildren().addAll(view, specPane);
         
         gamePane.setOnKeyPressed(this::keyPressed);
         gamePane.setOnMouseClicked(this::reset);
         gamePane.setOnKeyReleased(this::keyReleased);
         view.setFocusTraversable(true);
-        CarTimer moveCarModel = new CarTimer(carModel,this);
+        CarTimer moveCarModel = new CarTimer(carModel,gameModel,this);
         
         Timer t = new Timer(true);
         t.scheduleAtFixedRate(moveCarModel, 0, 20);
@@ -130,6 +155,9 @@ public class GameFXMLController {
         }
     }
     public void update() {
+        lapTimeText.setText(gameModel.timeToString());
+        lapText.setText(gameModel.getLaps() +"");
+        speedText.setText(Math.round(carModel.getSpeed()*3.6) + " km/h");
         view.update();
         trackView.update();
     }
@@ -139,5 +167,6 @@ public class GameFXMLController {
 
     private void reset(MouseEvent m) {
         carModel.resetCar();
+        gameModel.resetLaptime();
     }
 }

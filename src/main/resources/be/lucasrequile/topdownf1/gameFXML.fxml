@@ -1,8 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" fx:id="gamePane" prefHeight="800.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="be.lucasrequile.topdownf1.GameFXMLController">
-    
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.lucasrequile.topdownf1.GameFXMLController">
+   <children>
+      <AnchorPane fx:id="specPane" layoutX="956.0" layoutY="14.0" prefHeight="99.0" prefWidth="230.0">
+         <children>
+            <Text fx:id="lapTimeText" layoutX="105.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0:00:00">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="staticTextLapTime" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lap Time:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="staticTextSpeed" layoutX="14.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Speed:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="speedText" layoutX="105.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 km/h">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="staticTextLap" layoutX="14.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lap:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="lapText" layoutX="105.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="gamePane" prefHeight="800.0" prefWidth="1200.0" />
+   </children>
 </AnchorPane>
