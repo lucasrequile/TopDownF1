@@ -4,6 +4,8 @@
  */
 package view;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
@@ -19,7 +21,8 @@ public class GameView extends Region {
     private AnchorPane carPane;
     private AnchorPane trackPane;
     private Rectangle rectangle;
-    public final static int SIZE = 2;
+    private ImageView carImgV;
+    public final static int SIZE = 4;
     Car model;
 
     public GameView(Car model, AnchorPane trackPane) {
@@ -27,11 +30,18 @@ public class GameView extends Region {
         anchorPane = new AnchorPane();
         this.trackPane = trackPane;
         
-        rectangle = new Rectangle(1920/2,1080/2,model.getLength()*SIZE,model.getWidth()*SIZE);
-        rectangle.setFill(Color.ORANGE);
+        Image carimg = new Image("car1.png");
+        carImgV = new ImageView(carimg);
+        carImgV.setFitHeight(model.getWidth()*SIZE);
+        carImgV.setFitWidth(model.getLength()*SIZE);
+        carImgV.setTranslateX(1920/2);
+        carImgV.setTranslateY(1080/2);
         
-        carPane = new AnchorPane(rectangle);
-        anchorPane.getChildren().addAll(trackPane, rectangle);
+        /*rectangle = new Rectangle(1920/2,1080/2,model.getLength()*SIZE,model.getWidth()*SIZE);
+        rectangle.setFill(Color.ORANGE);*/
+        
+        carPane = new AnchorPane(carImgV);
+        anchorPane.getChildren().addAll(trackPane, carPane);
     }
     
     public void update(){
@@ -39,8 +49,7 @@ public class GameView extends Region {
         
         trackPane.setTranslateX(-model.getX()*SIZE);
         trackPane.setTranslateY(-model.getY()*SIZE);
-        
-        rectangle.setRotate(model.getDegrees());
+        carImgV.setRotate(model.getDegrees());
 
         getChildren().addAll(anchorPane);
     }

@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -41,8 +43,19 @@ public class GameFXMLController {
         carModel = new Car(0,0,0,2,5,85,12,-60, -5,GasState.IDLE, SteerState.IDLE);
         
         trackView = new TrackView(trackModel);
+        AnchorPane grassPane = new AnchorPane();
+        Image forestImg = new Image("grass.png");
         
-        AnchorPane trackPane = new AnchorPane(trackView);
+        for(int i = -2000; i<3000; i=i+288){ //*size nog toevoegen
+            for(int j =-2000; j<1500; j=j+160){
+                ImageView forest = new ImageView(forestImg);
+                forest.setTranslateX(i);
+                forest.setTranslateY(j);
+                grassPane.getChildren().add(forest);
+            }
+        }
+        
+        AnchorPane trackPane = new AnchorPane(grassPane,trackView);
         view = new GameView(carModel, trackPane);
         
         
@@ -62,17 +75,23 @@ public class GameFXMLController {
     public void keyPressed(KeyEvent k) {
         switch(k.getCode()){
             case UP:
+            case Z:
                 isGasPressed = true;
                 carModel.setGasState(GasState.ACCELERATING);
                 break;
             case DOWN:
+            case S:
                 isGasPressed = true;
                 carModel.setGasState(GasState.DECELERATING);
                 break;
             case RIGHT:
+            case D:
+                isSteered = true;
                 carModel.setSteerState(SteerState.RIGHT);
                 break;
             case LEFT:
+            case Q:
+                isSteered = true;
                 carModel.setSteerState(SteerState.LEFT);
                 break;
         }
@@ -81,13 +100,21 @@ public class GameFXMLController {
     public void keyReleased(KeyEvent k){
         switch(k.getCode()){
             case UP:
+            case Z:
                 isGasPressed = false;
+                break;
             case DOWN:
+            case S:
                 isGasPressed = false;
+                break;
             case LEFT:
+            case Q:
                 isSteered = false;
+                break;
             case RIGHT:
+            case D:
                 isSteered = false;
+                break;
         }
         update();
     }

@@ -64,12 +64,12 @@ public class Car {
         switch(steerState){
             case RIGHT:
                 if(speed>0){
-                degrees = degrees + 2;
+                degrees++;
                 }else{}
                 break;
             case LEFT:
                 if(speed>0){
-                degrees = degrees - 2;
+                degrees--;
                 }else{}
                 break;
         }
