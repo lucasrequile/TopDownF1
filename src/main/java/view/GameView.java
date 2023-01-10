@@ -16,21 +16,32 @@ import model.Car;
  */
 public class GameView extends Region {
     private AnchorPane anchorPane;
-    public final static int SIZE = 3;
+    private AnchorPane carPane;
+    private AnchorPane trackPane;
+    private Rectangle rectangle;
+    public final static int SIZE = 2;
     Car model;
 
-    public GameView(Car model) {
+    public GameView(Car model, AnchorPane trackPane) {
         this.model = model;
         anchorPane = new AnchorPane();
-        Rectangle rectangle = new Rectangle(10*SIZE,10*SIZE,SIZE,SIZE);
+        this.trackPane = trackPane;
+        
+        rectangle = new Rectangle(1920/2,1080/2,model.getLength()*SIZE,model.getWidth()*SIZE);
         rectangle.setFill(Color.ORANGE);
-        anchorPane.getChildren().add(rectangle);
+        
+        carPane = new AnchorPane(rectangle);
+        anchorPane.getChildren().addAll(trackPane, rectangle);
     }
     
     public void update(){
         getChildren().clear();
-        anchorPane.setTranslateX(model.getX()*SIZE);
-        anchorPane.setTranslateY(model.getY()*SIZE);
+        
+        trackPane.setTranslateX(-model.getX()*SIZE);
+        trackPane.setTranslateY(-model.getY()*SIZE);
+        
+        rectangle.setRotate(model.getDegrees());
+
         getChildren().addAll(anchorPane);
     }
 
@@ -38,9 +49,5 @@ public class GameView extends Region {
         return SIZE;
     }
     
-    
-    
-    
-        
     
 }

@@ -11,7 +11,6 @@ import model.Car;
 import model.GasState;
 import model.SteerState;
 import model.TrackModel;
-import view.CarView;
 import view.GameView;
 import view.TrackView;
 
@@ -31,7 +30,6 @@ public class GameFXMLController {
     Car carModel;
     GameView view;
     
-    CarView carView;
     TrackView trackView;
     
     private boolean isGasPressed = false;
@@ -42,12 +40,13 @@ public class GameFXMLController {
         trackModel = new TrackModel(670.7,917.4);
         carModel = new Car(0,0,0,2,5,85,12,-60, -5,GasState.IDLE, SteerState.IDLE);
         
-        view = new GameView(carModel);
-        
-        carView = new CarView(carModel);
         trackView = new TrackView(trackModel);
         
-        gamePane.getChildren().addAll(view,trackView, carView);
+        AnchorPane trackPane = new AnchorPane(trackView);
+        view = new GameView(carModel, trackPane);
+        
+        
+        gamePane.getChildren().addAll(view);
         
         gamePane.setOnKeyPressed(this::keyPressed);
         gamePane.setOnMouseClicked(this::reset);
@@ -105,7 +104,6 @@ public class GameFXMLController {
     }
     public void update() {
         view.update();
-        carView.update();
         trackView.update();
     }
     public boolean isKeyPressed(){

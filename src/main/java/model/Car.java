@@ -1,4 +1,6 @@
 package model;
+
+import javax.vecmath.Vector2d;
 /**
  *
  * @author Lucas Requilé
