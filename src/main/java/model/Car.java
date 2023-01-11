@@ -1,6 +1,7 @@
 package model;
 
-import javax.vecmath.Vector2d;
+import javafx.scene.image.Image;
+
 /**
  *
  * @author Lucas Requilé
@@ -24,6 +25,7 @@ public class Car {
     private double elapsedTime;
     private long startTime;
     private long endTime;
+    private Image img;
     
 
     public Car(double x, double y, double degrees, int width, int length, double topSpeed, double acceleration,double deceleration,double bulgeOutDeceleration,GasState gasState, SteerState steerState) {
@@ -39,10 +41,12 @@ public class Car {
         this.bulgeOutDeceleration = bulgeOutDeceleration;
         this.gasState = gasState;
         this.steerState = steerState;
+        img = new Image("ferrariF1.png");
     }
     
     public void resetCar(){
-        x = y = speed = degrees =  0;
+        x = y = speed = 0;
+        degrees = 180;
         gasState = GasState.IDLE;
         steerState = SteerState.IDLE;
     }
@@ -149,5 +153,52 @@ public void position(){
     public void setSteerState(SteerState steerState) {
         this.steerState = steerState;
     }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setTopSpeed(double topSpeed) {
+        this.topSpeed = topSpeed;
+    }
+
+    public void setAcceleration(double acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public void setDeceleration(double deceleration) {
+        this.deceleration = deceleration;
+    }
+
+    public void setBulgeOutDeceleration(double bulgeOutDeceleration) {
+        this.bulgeOutDeceleration = bulgeOutDeceleration;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public double getTopSpeed() {
+        return topSpeed;
+    }
+
+    public double getAcceleration() {
+        return acceleration;
+    }
+
+    public double getDeceleration() {
+        return deceleration;
+    }
+
+    public Image getImg() {
+        return img;
+    }
+
+    public void setImg(Image img) {
+        this.img = img;
+    }
+    
+    
    
+    
 }

@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import model.Car;
 
 /**
@@ -20,20 +18,18 @@ public class GameView extends Region {
     private AnchorPane anchorPane;
     private AnchorPane carPane;
     private AnchorPane trackPane;
-    private Rectangle rectangle;
     private ImageView carImgV;
-    public final static int SIZE = 4;
+    public final static int SIZE = 5;
     Car model;
 
-    public GameView(Car model, AnchorPane trackPane) {
+    public GameView(Car model, AnchorPane trackPane, Image carimg) {
         this.model = model;
         anchorPane = new AnchorPane();
         this.trackPane = trackPane;
         
-        Image carimg = new Image("car1.png");
         carImgV = new ImageView(carimg);
-        carImgV.setFitHeight(model.getWidth()*SIZE);
-        carImgV.setFitWidth(model.getLength()*SIZE);
+        carImgV.setFitHeight(model.getWidth()*2*SIZE);
+        carImgV.setFitWidth(model.getLength()*2*SIZE);
         carImgV.setTranslateX(1920/2);
         carImgV.setTranslateY(1080/2);
         
@@ -58,5 +54,8 @@ public class GameView extends Region {
         return SIZE;
     }
     
+    public ImageView getImageView(){
+        return carImgV;
+    }
     
 }

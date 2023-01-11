@@ -1,10 +1,17 @@
 package view;
 
+import java.util.ArrayList;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.shape.Shape;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeType;
+import model.GameModel;
 import model.TrackModel;
 
 /**
@@ -16,13 +23,15 @@ public class TrackView extends Region{
     private AnchorPane anchorPane;
     private GameView gameView;
     private int size = gameView.getSIZE();
-    
+    private double actualPointInMetersX;
+    private double actualPointInMetersY;
+    private SVGPath svgTrack;
 
     public TrackView(TrackModel model) {
         this.model = model;
         anchorPane = new AnchorPane();
 
-        SVGPath svgTrack = new SVGPath();
+        svgTrack = new SVGPath();
         svgTrack.setContent(model.getTrackSVGCode());
         svgTrack.setFill(Color.BLACK);
         svgTrack.setStrokeType(StrokeType.OUTSIDE);
@@ -49,12 +58,20 @@ public class TrackView extends Region{
         double startPointX = model.getxCoStart();
         double startPointY = model.getyCoStart();
         double trackWidth = 26;
+        Line startline = new Line(startPointX+trackWidth,startPointY-trackWidth/2+3,startPointX+trackWidth,startPointY+trackWidth/2-3);
+        startline.setStroke(Color.WHITE);
+        startline.setStrokeWidth(3);
+        startline.setStrokeLineCap(StrokeLineCap.BUTT);
+        startline.getStrokeDashArray().add(3.0);
+        
+        anchorPane.getChildren().add(startline);
         anchorPane.setTranslateX(translateScaleVarX-startPointX*size);
         //666 is het y coordinaat van de baan, -26 voor de baan (20px, en 2x3pxl voor de rand)
         anchorPane.setTranslateY(translateScaleVarY-(startPointY-trackWidth)*size);
         
-        double actualPointInMetersX = -(anchorPane.getTranslateX()-translateScaleVarX)/size;
-        double actualPointInMetersY = -(anchorPane.getTranslateY()-translateScaleVarY)/size+trackWidth;
+        
+        actualPointInMetersX = -(anchorPane.getTranslateX()-translateScaleVarX)/size;
+        actualPointInMetersY = -(anchorPane.getTranslateY()-translateScaleVarY)/size+trackWidth;
         
         //zet in het midden vh scherm.
         double middenX = 1920/2;
@@ -65,13 +82,10 @@ public class TrackView extends Region{
         getChildren().addAll(anchorPane);
         
         System.out.println("Actual point in meters: " + actualPointInMetersX + ","+actualPointInMetersY);
+        
         update();
     }
 
     public void update(){
-        getChildren().clear();
-        /*anchorPane.setTranslateX(model.getX());
-        anchorPane.setTranslateY(model.getY());*/
-        getChildren().addAll(anchorPane);
     }
 }

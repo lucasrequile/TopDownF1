@@ -1,18 +1,23 @@
 package be.lucasrequile.topdownf1;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.Car;
 import model.GameModel;
 import model.GasState;
+import model.PrimaryModel;
 import model.SteerState;
 import model.TrackModel;
 import view.GameView;
@@ -50,27 +55,62 @@ public class GameFXMLController {
     @FXML
     private Text lapText;
     
-    TrackModel trackModel;
-    Car carModel;
-    GameModel gameModel;
-    GameView view;
+    @FXML
+    private Text staticTextBestLap;
+     
+    @FXML
+    private Text bestLapTimeText;
     
-    TrackView trackView;
+    private PrimaryModel primaryModel;
+    private TrackModel trackModel;
+    private Car carModel;
+    private GameModel gameModel;
+    private GameView view;
+    
+    private TrackView trackView;
     
     private boolean isGasPressed = false;
     private boolean isSteered = false;
     private int size;
+    private final PrimaryController primaryController;
+    private Stage stage;
     
+    public GameFXMLController(PrimaryController primaryController) {
+        // We received the first controller, now let's make it usable throughout this controller.
+        this.primaryController = primaryController;
+        primaryModel = primaryController.getModel();
+
+        // Create the new stage
+        stage = new Stage();
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("gameFXML.fxml"));
+
+            // Set this class as the controller
+            loader.setController(this);
+
+            // Load the Scene
+            stage.setScene(new Scene(loader.load(), 1920, 1080));
+            stage.setFullScreen(true);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void showStage() {
+        stage.showAndWait();
+    }
+
     @FXML
     void initialize() {
+        carModel = primaryModel.getCar();
+        gameModel = primaryModel.getGameModel();
         trackModel = new TrackModel(670.7,917.4);
-        carModel = new Car(0,0,180,2,5,85,12,-60, -5,GasState.IDLE, SteerState.IDLE);
-        gameModel = new GameModel(carModel);
         
         trackView = new TrackView(trackModel);
+        
         AnchorPane grassPane = new AnchorPane();
         Image forestImg = new Image("grass.png");
-        
         for(int i = -5000; i<5000; i=i+288){ //*size nog toevoegen
             for(int j =-7000; j<1500; j=j+160){
                 ImageView forest = new ImageView(forestImg);
@@ -79,13 +119,12 @@ public class GameFXMLController {
                 grassPane.getChildren().add(forest);
             }
         }
-        
         AnchorPane trackPane = new AnchorPane(grassPane,trackView);
-        view = new GameView(carModel, trackPane);
         
+        Image img = primaryModel.getCar().getImg();
+        view = new GameView(carModel, trackPane, img);
         
         gamePane.getChildren().addAll(view, specPane);
-        
         gamePane.setOnKeyPressed(this::keyPressed);
         gamePane.setOnMouseClicked(this::reset);
         gamePane.setOnKeyReleased(this::keyReleased);
@@ -155,8 +194,9 @@ public class GameFXMLController {
         }
     }
     public void update() {
-        lapTimeText.setText(gameModel.timeToString());
+        lapTimeText.setText(gameModel.timeToString(gameModel.getLaptime()));
         lapText.setText(gameModel.getLaps() +"");
+        bestLapTimeText.setText(gameModel.timeToString(gameModel.getBestLap()));
         speedText.setText(Math.round(carModel.getSpeed()*3.6) + " km/h");
         view.update();
         trackView.update();

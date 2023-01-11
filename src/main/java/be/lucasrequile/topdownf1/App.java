@@ -7,20 +7,19 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import model.PrimaryModel;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
-
     private static Scene scene;
-
+    private PrimaryModel primaryModel;
+    
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("gameFXML"), 1920, 1080);
-        stage.setScene(scene);
-        stage.setFullScreen(true);
-        stage.show();
+        PrimaryController primaryController = new PrimaryController();
+        primaryController.showStage();
     }
 
     static void setRoot(String fxml) throws IOException {
