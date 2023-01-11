@@ -17,6 +17,7 @@ import model.Car;
 import model.PrimaryModel;
 import model.CarEnum;
 import model.GameModel;
+import model.TrackEnum;
 
 public class PrimaryController {
     private final Stage stage;
@@ -50,6 +51,9 @@ public class PrimaryController {
 
     @FXML
     private ChoiceBox carModelChoiceBox;
+    
+    @FXML
+    private ChoiceBox trackChoiceBox;
 
     @FXML
     private Button primaryButton;
@@ -77,7 +81,10 @@ public class PrimaryController {
         primaryButton.setOnAction(event -> openLayout2());
         
         carModelChoiceBox.getItems().addAll("Ferrari F1 car", "RedBull F1 car", "BMW Road car");
-        carModelChoiceBox.setValue("choose car");
+        carModelChoiceBox.setValue("Choose car");
+        
+        trackChoiceBox.getItems().addAll("Redbull Ring, Austria","Spa-Francorchamps, Belgium");
+        trackChoiceBox.setValue("Choose track");
         
         PrimaryChecker checker = new PrimaryChecker(model,this);
         
@@ -87,29 +94,35 @@ public class PrimaryController {
     }
     
     public void update(){
-        Object choice = carModelChoiceBox.getSelectionModel().getSelectedItem();
-        if(choice.equals("choose car")){
+        Object carChoice = carModelChoiceBox.getSelectionModel().getSelectedItem();
+        if(carChoice.equals("choose car")){
             
         }
-        if(choice.equals("Ferrari F1 car")){
+        if(carChoice.equals("Ferrari F1 car")){
             model.carChoice(CarEnum.FERRARIF1);
-        }if(choice.equals("RedBull F1 car")){
+        }if(carChoice.equals("RedBull F1 car")){
             model.carChoice(CarEnum.REDBULLF1);
-        }if(choice.equals("BMW Road car")){
+        }if(carChoice.equals("BMW Road car")){
             model.carChoice(CarEnum.BMWROADCAR);
         }
         speedText.setText(model.getCar().getTopSpeed()*3.6 + " km/h");
-        accelerationText.setText(model.getCar().getAcceleration() + " m/s²");
-        brakeText.setText(model.getCar().getDeceleration() + " m/s²");
+        double accelerationSeconds = (double)Math.round((100/3.6)/model.getCar().getAcceleration()*10)/10;
+        double decelerationSeconds = (double)Math.round((100/3.6)/-model.getCar().getDeceleration()*10)/10;
+        accelerationText.setText(model.getCar().getAcceleration() + " m/s²    -    0-100 km/h in " + accelerationSeconds + "s");
+        brakeText.setText(model.getCar().getDeceleration() + " m/s²   -    100-0 km/h in " + decelerationSeconds + "s" );
         carImageView.setImage(model.getCar().getImg());
+        
+        
+        Object trackChoice = trackChoiceBox.getSelectionModel().getSelectedItem();
+        if(trackChoice.equals("Redbull Ring, Austria")){
+            model.trackChoice(TrackEnum.AUSTRIA);
+        }
+        if(trackChoice.equals("Spa-Francorchamps, Belgium")){
+            model.trackChoice(TrackEnum.SPA);
+        }
     }
 
     public PrimaryModel getModel() {
         return model;
     }
-    
-    
-    
-    
-
 }

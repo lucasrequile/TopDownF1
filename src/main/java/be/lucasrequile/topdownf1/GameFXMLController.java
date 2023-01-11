@@ -105,15 +105,18 @@ public class GameFXMLController {
     void initialize() {
         carModel = primaryModel.getCar();
         gameModel = primaryModel.getGameModel();
-        trackModel = new TrackModel(670.7,917.4);
+        trackModel = primaryModel.getTrackModel();
         
         trackView = new TrackView(trackModel);
         
         AnchorPane grassPane = new AnchorPane();
         Image forestImg = new Image("grass.png");
-        for(int i = -5000; i<5000; i=i+288){ //*size nog toevoegen
-            for(int j =-7000; j<1500; j=j+160){
+        int grassScale = 2;
+        for(int i = -(int)trackModel.getSvgWidth()*6; i<(int)trackModel.getSvgWidth()*6; i=i+288*grassScale){ //*size nog toevoegen
+            for(int j =-(int)trackModel.getSvgHeight()*6; j<(int)trackModel.getSvgHeight()*6; j=j+160*grassScale){
                 ImageView forest = new ImageView(forestImg);
+                forest.setFitWidth(288*grassScale);
+                forest.setFitHeight(160*grassScale);
                 forest.setTranslateX(i);
                 forest.setTranslateY(j);
                 grassPane.getChildren().add(forest);

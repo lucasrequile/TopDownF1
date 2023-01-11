@@ -1,17 +1,9 @@
 package view;
 
-import java.util.ArrayList;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.SVGPath;
-import javafx.scene.shape.Shape;
-import javafx.scene.shape.StrokeLineCap;
-import javafx.scene.shape.StrokeType;
-import model.GameModel;
+import javafx.scene.shape.*;
 import model.TrackModel;
 
 /**
@@ -68,7 +60,6 @@ public class TrackView extends Region{
         anchorPane.setTranslateX(translateScaleVarX-startPointX*size);
         //666 is het y coordinaat van de baan, -26 voor de baan (20px, en 2x3pxl voor de rand)
         anchorPane.setTranslateY(translateScaleVarY-(startPointY-trackWidth)*size);
-        
         
         actualPointInMetersX = -(anchorPane.getTranslateX()-translateScaleVarX)/size;
         actualPointInMetersY = -(anchorPane.getTranslateY()-translateScaleVarY)/size+trackWidth;

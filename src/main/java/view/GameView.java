@@ -33,9 +33,6 @@ public class GameView extends Region {
         carImgV.setTranslateX(1920/2);
         carImgV.setTranslateY(1080/2);
         
-        /*rectangle = new Rectangle(1920/2,1080/2,model.getLength()*SIZE,model.getWidth()*SIZE);
-        rectangle.setFill(Color.ORANGE);*/
-        
         carPane = new AnchorPane(carImgV);
         anchorPane.getChildren().addAll(trackPane, carPane);
     }

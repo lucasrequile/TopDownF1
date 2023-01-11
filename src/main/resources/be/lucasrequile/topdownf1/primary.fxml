@@ -58,5 +58,11 @@
             <Font size="13.0" />
          </font>
       </Text>
+      <Label layoutX="13.0" layoutY="240.0" text="Track:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="trackChoiceBox" layoutX="13.0" layoutY="266.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

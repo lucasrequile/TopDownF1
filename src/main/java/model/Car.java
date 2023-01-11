@@ -197,8 +197,4 @@ public void position(){
     public void setImg(Image img) {
         this.img = img;
     }
-    
-    
-   
-    
 }
