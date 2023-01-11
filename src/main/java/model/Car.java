@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2023 Lucas Requilé
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package model;
 
 import javafx.scene.image.Image;
@@ -27,7 +43,20 @@ public class Car {
     private long endTime;
     private Image img;
     
-
+    /**
+     *
+     * @param x startpositie x
+     * @param y startpositie y
+     * @param degrees starthoek in graden
+     * @param width breedte van auto
+     * @param length lengte van auto
+     * @param topSpeed topsnelheid van auto(m/s)
+     * @param acceleration acceleratie van auto (m/s2)
+     * @param deceleration deceleratie van auto (m/s2)
+     * @param bulgeOutDeceleration deceleratie van auto wanneer er niets gebeurd (m/s2)
+     * @param gasState status van het gaspedaal
+     * @param steerState status van het stuur 
+     */
     public Car(double x, double y, double degrees, int width, int length, double topSpeed, double acceleration,double deceleration,double bulgeOutDeceleration,GasState gasState, SteerState steerState) {
         this.width = width;
         this.length = length;        
@@ -44,6 +73,9 @@ public class Car {
         img = new Image("ferrariF1.png");
     }
     
+    /**
+     * Auto wordt gereset naar (0,0)
+     */
     public void resetCar(){
         x = y = speed = 0;
         degrees = 180;
@@ -51,6 +83,10 @@ public class Car {
         steerState = SteerState.IDLE;
     }
     
+    /**
+     *
+     * @param gasState status van het gaspedaal
+     */
     public void gas(GasState gasState){
         switch(gasState){
             case IDLE:
@@ -64,6 +100,11 @@ public class Car {
                 break;
         }
     }
+
+    /**
+     *
+     * @param steerState status van het stuur
+     */
     public void steer(SteerState steerState){
         switch(steerState){
             case RIGHT:
@@ -78,7 +119,11 @@ public class Car {
                 break;
         }
     }
-public void position(){
+
+    /**
+     *  Methode position bepaalt de volgende x en y coordinaten vanuit de snelheid en de tijd tussen 2 ticks.
+     */
+    public void position(){
         gas(gasState);
         steer(steerState);
         double rad = Math.toRadians(degrees);
@@ -97,6 +142,10 @@ public void position(){
         System.out.println(speed*3.6 + " km/h");
     }
 
+    /**
+     *
+     * @return Breedte auto
+     */
     public int getWidth() {
         return width;
     }
