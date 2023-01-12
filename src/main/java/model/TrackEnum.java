@@ -21,5 +21,5 @@ package model;
  * @author Lucas Requilé
  */
 public enum TrackEnum {
-    AUSTRIA,SPA;
+    AUSTRIA,SPA,NURBURGRING;
 }

@@ -27,7 +27,7 @@
       </Label>
       <Button fx:id="primaryButton" layoutX="516.0" layoutY="17.0" prefHeight="72.0" prefWidth="109.0" text="START GAME" />
       <ChoiceBox fx:id="carModelChoiceBox" layoutX="14.0" layoutY="107.0" prefWidth="150.0" />
-      <ImageView fx:id="carImageView" fitHeight="288.0" fitWidth="177.0" layoutX="449.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="carImageView" fitHeight="158.0" fitWidth="231.0" layoutX="395.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
       <Text layoutX="14.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top speed:">
          <font>
             <Font size="13.0" />
@@ -64,5 +64,11 @@
          </font>
       </Label>
       <ChoiceBox fx:id="trackChoiceBox" layoutX="13.0" layoutY="266.0" prefWidth="150.0" />
+      <Text fx:id="trackInfoText" layoutX="13.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length: 0,00 km&#10;Corners: 0" wrappingWidth="259.9999755859376">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="trackImageView" fitHeight="158.0" fitWidth="231.0" layoutX="395.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

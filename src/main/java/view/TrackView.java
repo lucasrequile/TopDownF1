@@ -88,7 +88,7 @@ public class TrackView extends Region{
         
         getChildren().addAll(anchorPane);
         
-        System.out.println("Actual point in meters: " + actualPointInMetersX + ","+actualPointInMetersY);
+        //System.out.println("Actual point in meters: " + actualPointInMetersX + ","+actualPointInMetersY);
         
         update();
     }

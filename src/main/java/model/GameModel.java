@@ -51,7 +51,7 @@ public class GameModel {
         
         //voorbij de finish komen
         if((int)carModel.getX()==0 && (int)carModel.getY()<20 && (int)carModel.getY()>-20){
-            if(laptime > 10){
+            if(laptime > 30){
                 laps++;
                 bestLapCheck(laptime);
                 resetLaptime();
@@ -92,6 +92,4 @@ public class GameModel {
     public void resetLaptime(){
         laptime = 0;
     }
-    
-    
 }

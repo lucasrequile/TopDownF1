@@ -137,9 +137,9 @@ public class Car {
         
         x=x+speedX*elapsedTime;
         y=y+speedY*elapsedTime;
-        System.out.println(degrees + " degrees, " + rad + " rad, " + Math.cos(rad)+ " cos, " + speedX + " m/s X, " + speedY+ " m/s Y, ");
+        /*System.out.println(degrees + " degrees, " + rad + " rad, " + Math.cos(rad)+ " cos, " + speedX + " m/s X, " + speedY+ " m/s Y, ");
         System.out.println(x + ", " + y);
-        System.out.println(speed*3.6 + " km/h");
+        System.out.println(speed*3.6 + " km/h");*/
     }
 
     /**

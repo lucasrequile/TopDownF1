@@ -26,6 +26,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -55,9 +56,8 @@ public class PrimaryController {
         //nieuwe controller wordt aangemaakt en huidige controller wordt meegegeven
         GameFXMLController controller2 = new GameFXMLController(this);
         controller2.showStage();
+        stage.close();
     }
-    
-    
 
     @FXML
     private ResourceBundle resources;
@@ -82,30 +82,38 @@ public class PrimaryController {
 
     @FXML
     private Text brakeText;
+    
+    
+    @FXML
+    private Text trackInfoText;
 
     @FXML
     private ImageView carImageView;
     
-    PrimaryModel model;
-    Car carModel;
-    GameModel gameModel;
+    @FXML
+    private ImageView trackImageView;
+    
+    private PrimaryModel model;
+    private Car carModel;
+    private GameModel gameModel;
+    private Timer primaryTimer;
 
     @FXML
     void initialize() {
         model = new PrimaryModel();
         
-        primaryButton.setOnAction(event -> openLayout2());
+        primaryButton.setOnAction(this::buttonClick);
         
         carModelChoiceBox.getItems().addAll("Ferrari F1 car", "RedBull F1 car", "BMW Road car");
         carModelChoiceBox.setValue("Choose car");
         
-        trackChoiceBox.getItems().addAll("Redbull Ring, Austria","Spa-Francorchamps, Belgium");
+        trackChoiceBox.getItems().addAll("Redbull Ring, Austria","Spa-Francorchamps, Belgium", "Nürburgring, Germany");
         trackChoiceBox.setValue("Choose track");
         
         PrimaryChecker checker = new PrimaryChecker(model,this);
         
-        Timer t = new Timer(true);
-        t.scheduleAtFixedRate(checker, 0, 20);
+        primaryTimer = new Timer(true);
+        primaryTimer.scheduleAtFixedRate(checker, 0, 20);
         update();
     }
     
@@ -128,16 +136,27 @@ public class PrimaryController {
         brakeText.setText(model.getCar().getDeceleration() + " m/s²   -    100-0 km/h in " + decelerationSeconds + "s" );
         carImageView.setImage(model.getCar().getImg());
         
-        
         Object trackChoice = trackChoiceBox.getSelectionModel().getSelectedItem();
         if(trackChoice.equals("Redbull Ring, Austria")){
             model.trackChoice(TrackEnum.AUSTRIA);
+            trackInfoText.setText("Length: 4,318 km \nCorners: 10 ");
+            trackImageView.setImage(new Image("rbrLayout.png"));
         }
         if(trackChoice.equals("Spa-Francorchamps, Belgium")){
             model.trackChoice(TrackEnum.SPA);
+            trackInfoText.setText("Length: 7,004 km \nCorners: 20 \nCaution: this track isn't perfectly finished");
+            trackImageView.setImage(new Image("spaLayout.png"));
+        }
+        if(trackChoice.equals("Nürburgring, Germany")){
+            model.trackChoice(TrackEnum.NURBURGRING);
+            trackInfoText.setText("Length: 5,148 km \nCorners: 15 \nCaution: this track (especially start line) isn't perfectly finished");
+            trackImageView.setImage(new Image("nurburgringLayout.png"));
         }
     }
-
+    public void buttonClick(ActionEvent e){
+        primaryTimer.cancel();
+        openLayout2();
+    }
     public PrimaryModel getModel() {
         return model;
     }

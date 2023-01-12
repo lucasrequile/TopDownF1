@@ -92,20 +92,15 @@ public class GameFXMLController {
     private Stage stage;
     
     public GameFXMLController(PrimaryController primaryController) {
-        // We received the first controller, now let's make it usable throughout this controller.
         this.primaryController = primaryController;
         primaryModel = primaryController.getModel();
-
-        // Create the new stage
+        
         stage = new Stage();
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gameFXML.fxml"));
-
-            // Set this class as the controller
             loader.setController(this);
 
-            // Load the Scene
             stage.setScene(new Scene(loader.load(), 1920, 1080));
             stage.setFullScreen(true);
 
