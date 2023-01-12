@@ -20,7 +20,7 @@ import java.util.TimerTask;
 import model.PrimaryModel;
 
 /**
- *
+ * Timer-klasse voor PrimaryController
  * @author Lucas Requilé
  */
 public class PrimaryChecker extends TimerTask{

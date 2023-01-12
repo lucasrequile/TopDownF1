@@ -45,8 +45,6 @@ public class Car {
     
     /**
      *
-     * @param x startpositie x
-     * @param y startpositie y
      * @param degrees starthoek in graden
      * @param width breedte van auto
      * @param length lengte van auto
@@ -57,11 +55,9 @@ public class Car {
      * @param gasState status van het gaspedaal
      * @param steerState status van het stuur 
      */
-    public Car(double x, double y, double degrees, int width, int length, double topSpeed, double acceleration,double deceleration,double bulgeOutDeceleration,GasState gasState, SteerState steerState) {
+    public Car(double degrees, int width, int length, double topSpeed, double acceleration,double deceleration,double bulgeOutDeceleration,GasState gasState, SteerState steerState) {
         this.width = width;
-        this.length = length;        
-        this.x = x;
-        this.y = y;
+        this.length = length;
         this.degrees = degrees;
         //set-once vars
         this.topSpeed = topSpeed;
@@ -153,14 +149,9 @@ public class Car {
     public int getLength() {
         return length;
     }
-
-
+    
     public double getSpeed() {
         return speed;
-    }
-
-    public void setSpeed(double speed) {
-        this.speed = speed;
     }
 
     public double getDegrees() {
@@ -175,16 +166,8 @@ public class Car {
         return x;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
     public double getY() {
         return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     public GasState getGasState() {

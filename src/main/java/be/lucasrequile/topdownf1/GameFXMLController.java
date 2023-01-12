@@ -94,20 +94,21 @@ public class GameFXMLController {
     public GameFXMLController(PrimaryController primaryController) {
         this.primaryController = primaryController;
         primaryModel = primaryController.getModel();
-        
+        //maak FXML-stage aan
         stage = new Stage();
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gameFXML.fxml"));
             loader.setController(this);
 
             stage.setScene(new Scene(loader.load(), 1920, 1080));
+            stage.setTitle("Top-Down F1 - Game Window");
             stage.setFullScreen(true);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
     public void showStage() {
         stage.showAndWait();
     }
@@ -120,6 +121,7 @@ public class GameFXMLController {
         
         trackView = new TrackView(trackModel);
         
+        //maak gras aan en voeg toe aan de track.
         AnchorPane grassPane = new AnchorPane();
         Image forestImg = new Image("grass.png");
         int grassScale = 2;
@@ -135,6 +137,7 @@ public class GameFXMLController {
         }
         AnchorPane trackPane = new AnchorPane(grassPane,trackView);
         
+        //speel auto-foto vanuit model door aan de view.
         Image img = primaryModel.getCar().getImg();
         view = new GameView(carModel, trackPane, img);
         

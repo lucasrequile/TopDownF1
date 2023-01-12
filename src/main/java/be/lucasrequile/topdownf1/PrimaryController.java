@@ -38,13 +38,13 @@ import model.TrackEnum;
 
 public class PrimaryController {
     private final Stage stage;
-
     public PrimaryController() {
         stage = new Stage();
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
             loader.setController(this);
             stage.setScene(new Scene(loader.load(), 640, 480));
+            stage.setTitle("Top-Down F1 - Start settings window");
         }catch(IOException e) {
             e.printStackTrace();
         }
@@ -107,7 +107,7 @@ public class PrimaryController {
         carModelChoiceBox.getItems().addAll("Ferrari F1 car", "RedBull F1 car", "BMW Road car");
         carModelChoiceBox.setValue("Choose car");
         
-        trackChoiceBox.getItems().addAll("Redbull Ring, Austria","Spa-Francorchamps, Belgium", "Nürburgring, Germany");
+        trackChoiceBox.getItems().addAll("Redbull Ring, Austria","Nürburgring, Germany", "Spa-Francorchamps, Belgium");
         trackChoiceBox.setValue("Choose track");
         
         PrimaryChecker checker = new PrimaryChecker(model,this);
@@ -144,12 +144,12 @@ public class PrimaryController {
         }
         if(trackChoice.equals("Spa-Francorchamps, Belgium")){
             model.trackChoice(TrackEnum.SPA);
-            trackInfoText.setText("Length: 7,004 km \nCorners: 20 \nCaution: this track isn't perfectly finished");
+            trackInfoText.setText("Length: 7,004 km \nCorners: 20 \nCaution: this track (especially start line) isn't perfectly finished");
             trackImageView.setImage(new Image("spaLayout.png"));
         }
         if(trackChoice.equals("Nürburgring, Germany")){
             model.trackChoice(TrackEnum.NURBURGRING);
-            trackInfoText.setText("Length: 5,148 km \nCorners: 15 \nCaution: this track (especially start line) isn't perfectly finished");
+            trackInfoText.setText("Length: 5,148 km \nCorners: 15 \nCaution: this track hasn't been tested thoroughly");
             trackImageView.setImage(new Image("nurburgringLayout.png"));
         }
     }

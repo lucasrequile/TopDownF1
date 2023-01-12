@@ -39,6 +39,7 @@ public class GameView extends Region {
         anchorPane = new AnchorPane();
         this.trackPane = trackPane;
         
+        //zet auto in midden van scherm
         carImgV = new ImageView(carimg);
         carImgV.setFitHeight(model.getWidth()*2*SIZE);
         carImgV.setFitWidth(model.getLength()*2*SIZE);
