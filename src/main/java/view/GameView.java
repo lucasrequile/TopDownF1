@@ -34,10 +34,11 @@ public class GameView extends Region {
     public final static int SIZE = 5;
     Car model;
 
-    public GameView(Car model, AnchorPane trackPane, Image carimg) {
+    public GameView(Car model, AnchorPane trackPane) {
         this.model = model;
         anchorPane = new AnchorPane();
         this.trackPane = trackPane;
+        Image carimg = model.getImg();
         
         //zet auto in midden van scherm
         carImgV = new ImageView(carimg);
