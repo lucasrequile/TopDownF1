@@ -86,6 +86,13 @@ public class PrimaryController {
     
     @FXML
     private Text trackInfoText;
+    
+    
+    @FXML
+    private Text carCheckText;
+    
+    @FXML
+    private Text trackCheckText;
 
     @FXML
     private ImageView carImageView;
@@ -97,6 +104,8 @@ public class PrimaryController {
     private Car carModel;
     private GameModel gameModel;
     private Timer primaryTimer;
+    private boolean trackChosen = false;
+    private boolean carChosen = false;
 
     @FXML
     void initialize() {
@@ -119,15 +128,18 @@ public class PrimaryController {
     
     public void update(){
         Object carChoice = carModelChoiceBox.getSelectionModel().getSelectedItem();
-        if(carChoice.equals("choose car")){
-            
+        if(carChoice.equals("Choose car")){
+            carChosen = false;
         }
         if(carChoice.equals("Ferrari F1 car")){
             model.carChoice(CarEnum.FERRARIF1);
+            carChosen = true;
         }if(carChoice.equals("RedBull F1 car")){
             model.carChoice(CarEnum.REDBULLF1);
+            carChosen = true;
         }if(carChoice.equals("BMW Road car")){
             model.carChoice(CarEnum.BMWROADCAR);
+            carChosen = true;
         }
         speedText.setText(model.getCar().getTopSpeed()*3.6 + " km/h");
         double accelerationSeconds = (double)Math.round((100/3.6)/model.getCar().getAcceleration()*10)/10;
@@ -137,25 +149,43 @@ public class PrimaryController {
         carImageView.setImage(model.getCar().getImg());
         
         Object trackChoice = trackChoiceBox.getSelectionModel().getSelectedItem();
+        if(trackChoice.equals("Choose track")){
+            trackChosen = false;
+        }
         if(trackChoice.equals("Redbull Ring, Austria")){
+            trackChosen = true;
             model.trackChoice(TrackEnum.AUSTRIA);
             trackInfoText.setText("Length: 4,318 km \nCorners: 10 ");
             trackImageView.setImage(new Image("rbrLayout.png"));
         }
         if(trackChoice.equals("Spa-Francorchamps, Belgium")){
+            trackChosen = true;
             model.trackChoice(TrackEnum.SPA);
             trackInfoText.setText("Length: 7,004 km \nCorners: 20 \nCaution: this track (especially start line) isn't perfectly finished");
             trackImageView.setImage(new Image("spaLayout.png"));
         }
         if(trackChoice.equals("Nürburgring, Germany")){
+            trackChosen = true;
             model.trackChoice(TrackEnum.NURBURGRING);
             trackInfoText.setText("Length: 5,148 km \nCorners: 15 \nCaution: this track hasn't been tested thoroughly");
             trackImageView.setImage(new Image("nurburgringLayout.png"));
         }
     }
     public void buttonClick(ActionEvent e){
-        primaryTimer.cancel();
-        openLayout2();
+        if(carChosen == true){
+            carCheckText.setText("");
+            if(trackChosen == true){
+                trackCheckText.setText("");
+                primaryTimer.cancel();
+                openLayout2();
+            }
+            else{
+                trackCheckText.setText("<-- Please select a track.");
+            }
+        }
+        else{
+            carCheckText.setText("<-- Please select a car.");
+        }
     }
     public PrimaryModel getModel() {
         return model;

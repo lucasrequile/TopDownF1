@@ -1,0 +1,125 @@
+[Scia Reto](https://sciareto.org) mind map   
+> __version__=`1.1`,showJumps=`true`
+---
+
+# Top\-down 2D racing game
+> collapsed=`true`
+
+
+## Model
+> collapsed=`true`
+
+
+### PrimaryModel
+> collapsed=`true`
+
+
+#### Model voor settings\-paneel voor de game opstart
+
+#### Behandelt auto\- en trackkeuze
+
+### GameModel
+> collapsed=`true`
+
+
+#### Model van het spel
+
+#### Houdt aantal ronden, rondetijd, beste rondetijd bij
+
+### CarModel
+> collapsed=`true`
+
+
+#### Model van de auto zelf
+
+#### Berekent en houdt positie, snelheid,<br/> hoek, status van gas/rem bij
+
+### TrackModel
+> collapsed=`true`
+
+
+#### Model van de racebaan
+
+#### Houdt svg\-eigenschappen & startcoördinaten bij
+
+### ENUM's
+> collapsed=`true`
+
+
+#### CarEnum
+
+#### GasState
+
+#### SteerState
+
+#### TrackEnum
+
+## View
+> collapsed=`true`
+
+
+### GameView
+> collapsed=`true`
+
+
+#### View van het spel
+
+#### Krijgt automodel & een anchorpane met de baan mee
+
+#### Laat auto draaien & beweegt de baan
+
+### TrackView
+> collapsed=`true`
+
+
+#### View van de racebaan
+
+#### Zet de svg\-code en properties om naar een baan <br/>met de juiste grootte op de juiste plek, voegt een <br/>startlijn toe, en zet in het midden v/h scherm
+
+## Controller
+> collapsed=`true`
+
+
+### PrimaryController
+> collapsed=`true`
+
+
+#### Laadt juiste FXML in
+
+#### Bekijkt de keuzes van het choicemenu<br/>en speelt deze door aan het model
+
+#### Past varia\-tekst\-gegevens aan 
+
+#### Maakt het mogelijk om 2e FXML te openen
+
+### GameFXMLController
+> collapsed=`true`
+
+
+#### Laadt juiste FXML in
+
+#### Verzamelt alle modellen, genereert gras <br/>voor de view en start de timer
+
+#### KeyPressed & KeyReleased events worden opgevolgd
+> collapsed=`true`
+
+
+##### Werken met statussen \(enums\):<br/>De polling\-rate van het toetsenbord is niet te betrouwen<br/>Ook sturen & gasgeven blijft zo samen werken
+
+#### Updatet varia\-tekst\-info \(rondetijd, aantal rondes\)
+
+### Timers
+> collapsed=`true`
+
+
+#### PrimaryChecker
+> collapsed=`true`
+
+
+##### Checkt elke \.\.\. ms wat er aangevinkt is in <br/>de checkbox en updatet de info 
+
+#### CarTimer
+> collapsed=`true`
+
+
+##### Updatet de rondetijd, checkt of er gas <br/>gegeven/gestuurd wordt & updatet de positie<br/>van de auto

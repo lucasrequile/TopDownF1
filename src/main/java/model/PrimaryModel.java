@@ -36,11 +36,11 @@ public class PrimaryModel {
     private GameModel gameModel;
     private TrackModel trackModel;
     private String svgCode;
-    private Image img;
+    private Image img = new Image("ferrariF1.png");
     
     
     public PrimaryModel() {
-        car = new Car(180, width, length, topSpeed, acceleration, deceleration, bulgeOutDeceleration, GasState.IDLE, SteerState.IDLE);
+        car = new Car(180, width, length, topSpeed, acceleration, deceleration, bulgeOutDeceleration, GasState.IDLE, SteerState.IDLE, img);
         gameModel = new GameModel(car);
         trackModel = new TrackModel(svgCode, 0, 0, 0,0);
     }

@@ -137,9 +137,7 @@ public class GameFXMLController {
         }
         AnchorPane trackPane = new AnchorPane(grassPane,trackView);
         
-        //speel auto-foto vanuit model door aan de view.
-        Image img = primaryModel.getCar().getImg();
-        view = new GameView(carModel, trackPane, img);
+        view = new GameView(carModel, trackPane);
         
         gamePane.getChildren().addAll(view, specPane);
         gamePane.setOnKeyPressed(this::keyPressed);

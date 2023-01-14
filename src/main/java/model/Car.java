@@ -41,7 +41,7 @@ public class Car {
     private double elapsedTime;
     private long startTime;
     private long endTime;
-    private Image img;
+    private Image img = new Image("ferrariF1.png");;
     
     /**
      *
@@ -54,8 +54,9 @@ public class Car {
      * @param bulgeOutDeceleration deceleratie van auto wanneer er niets gebeurd (m/s2)
      * @param gasState status van het gaspedaal
      * @param steerState status van het stuur 
+     * @param carimg foto van auto
      */
-    public Car(double degrees, int width, int length, double topSpeed, double acceleration,double deceleration,double bulgeOutDeceleration,GasState gasState, SteerState steerState) {
+    public Car(double degrees, int width, int length, double topSpeed, double acceleration,double deceleration,double bulgeOutDeceleration,GasState gasState, SteerState steerState, Image carimg) {
         this.width = width;
         this.length = length;
         this.degrees = degrees;
@@ -66,7 +67,7 @@ public class Car {
         this.bulgeOutDeceleration = bulgeOutDeceleration;
         this.gasState = gasState;
         this.steerState = steerState;
-        img = new Image("ferrariF1.png");
+        this.img = carimg;
     }
     
     /**
