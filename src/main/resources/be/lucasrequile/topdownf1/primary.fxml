@@ -10,85 +10,65 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="11.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" wrappingWidth="380.53669357299805">
+      <Text layoutX="14.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" wrappingWidth="380.53669357299805">
          <font>
             <Font name="System Italic" size="25.0" />
          </font>
       </Text>
-      <Text layoutX="11.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top-down 2D racing game" wrappingWidth="380.53669357299805">
+      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top-down 2D racing game" wrappingWidth="380.53669357299805">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <Label layoutX="15.0" layoutY="89.0" text="Car model:">
+      <Label layoutX="14.0" layoutY="81.0" text="Car model:">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
       <Button fx:id="primaryButton" layoutX="516.0" layoutY="17.0" prefHeight="72.0" prefWidth="109.0" text="START GAME" />
-      <ChoiceBox fx:id="carModelChoiceBox" layoutX="15.0" layoutY="115.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="carModelChoiceBox" layoutX="14.0" layoutY="107.0" prefWidth="150.0" />
       <ImageView fx:id="carImageView" fitHeight="158.0" fitWidth="231.0" layoutX="395.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <Text layoutX="15.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top speed:">
+      <Text layoutX="14.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top speed:">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text layoutX="15.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acceleration:">
+      <Text layoutX="14.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acceleration:">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text layoutX="15.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brake decelleration:">
+      <Text layoutX="14.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brake decelleration:">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text fx:id="speedText" layoutX="149.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 km/h">
+      <Text fx:id="speedText" layoutX="148.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 km/h">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text fx:id="accelerationText" layoutX="149.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 m/s²">
+      <Text fx:id="accelerationText" layoutX="148.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 m/s²">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text fx:id="brakeText" layoutX="149.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 m/s²">
+      <Text fx:id="brakeText" layoutX="148.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 m/s²">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Label layoutX="14.0" layoutY="248.0" text="Track:">
+      <Label layoutX="13.0" layoutY="240.0" text="Track:">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="trackChoiceBox" layoutX="14.0" layoutY="274.0" prefWidth="150.0" />
-      <Text fx:id="trackInfoText" layoutX="14.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length: 0,00 km&#10;Corners: 0" wrappingWidth="259.9999755859376">
+      <ChoiceBox fx:id="trackChoiceBox" layoutX="13.0" layoutY="266.0" prefWidth="150.0" />
+      <Text fx:id="trackInfoText" layoutX="13.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length: 0,00 km&#10;Corners: 0" wrappingWidth="259.9999755859376">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
       <ImageView fx:id="trackImageView" fitHeight="158.0" fitWidth="231.0" layoutX="395.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="carCheckText" layoutX="201.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="167.86083984375">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Text>
-      <Text fx:id="trackCheckText" layoutX="201.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="167.86083984375">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Text>
-      <Text layoutX="14.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warning: works best with screen scaling @ 100%" wrappingWidth="380.53669357299805">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text layoutX="369.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" - Lucas Requilé" wrappingWidth="132.2392578125">
-         <font>
-            <Font name="System Italic" size="19.0" />
-         </font>
-      </Text>
    </children>
 </AnchorPane>
