@@ -28,32 +28,32 @@
       <Button fx:id="primaryButton" layoutX="516.0" layoutY="17.0" prefHeight="72.0" prefWidth="109.0" text="START GAME" />
       <ChoiceBox fx:id="carModelChoiceBox" layoutX="15.0" layoutY="115.0" prefWidth="150.0" />
       <ImageView fx:id="carImageView" fitHeight="158.0" fitWidth="231.0" layoutX="395.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-      <Text layoutX="15.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top speed:">
+      <Text layoutX="15.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top speed:">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text layoutX="15.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acceleration:">
+      <Text layoutX="15.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acceleration:">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text layoutX="15.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brake decelleration:">
+      <Text layoutX="15.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brake decelleration:">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text fx:id="speedText" layoutX="149.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 km/h">
+      <Text fx:id="speedText" layoutX="149.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 km/h">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text fx:id="accelerationText" layoutX="149.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 m/s²">
+      <Text fx:id="accelerationText" layoutX="149.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 m/s²">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text fx:id="brakeText" layoutX="149.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 m/s²">
+      <Text fx:id="brakeText" layoutX="149.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 m/s²">
          <font>
             <Font size="13.0" />
          </font>
@@ -88,6 +88,11 @@
       <Text layoutX="369.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" - Lucas Requilé" wrappingWidth="132.2392578125">
          <font>
             <Font name="System Italic" size="19.0" />
+         </font>
+      </Text>
+      <Text fx:id="carNameText" layoutX="15.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
          </font>
       </Text>
    </children>

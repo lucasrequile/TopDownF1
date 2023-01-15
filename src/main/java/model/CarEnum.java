@@ -16,10 +16,66 @@
  */
 package model;
 
+import javafx.scene.image.Image;
+
 /**
  *
  * @author Lucas Requilé
  */
 public enum CarEnum {
-    FERRARIF1,REDBULLF1,BMWROADCAR;
+    FERRARIF1("Ferrari F1-75",2,5,85,12,-60,-5,new Image("ferrariF1.png")),
+    REDBULLF1("Red Bull RB18",2,5,85,12,-60,-5,new Image("redbullcar.png")),
+    BMWROADCAR("BMW M8",2,5,70,7,-40,-5,new Image("BMWM8.png"));
+    
+    private String name;
+    private int width = 2;
+    private int length = 5;
+    private double topSpeed = 85;
+    private double acceleration = 12;
+    private double deceleration = -60;
+    private double bulgeOutDeceleration = -5;
+    private Image img;
+    
+    CarEnum(String name, int width, int length, double topSpeed, double acceleration, double deceleration, double bulgeOutDeceleration, Image img){
+        this.name = name;
+        this.width = width;
+        this.length = length;
+        this.topSpeed = topSpeed;
+        this.acceleration = acceleration;
+        this.deceleration = deceleration;
+        this.bulgeOutDeceleration = bulgeOutDeceleration;
+        this.img = img;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    public int getWidth() {
+        return width;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public double getTopSpeed() {
+        return topSpeed;
+    }
+
+    public double getAcceleration() {
+        return acceleration;
+    }
+
+    public double getDeceleration() {
+        return deceleration;
+    }
+
+    public double getBulgeOutDeceleration() {
+        return bulgeOutDeceleration;
+    }
+
+    public Image getImg() {
+        return img;
+    }
+    
 }

@@ -83,6 +83,8 @@ public class PrimaryController {
     @FXML
     private Text brakeText;
     
+    @FXML
+    private Text carNameText;
     
     @FXML
     private Text trackInfoText;
@@ -113,10 +115,14 @@ public class PrimaryController {
         
         primaryButton.setOnAction(this::buttonClick);
         
-        carModelChoiceBox.getItems().addAll("Ferrari F1 car", "RedBull F1 car", "BMW Road car");
+        for(CarEnum car: CarEnum.values()){
+            carModelChoiceBox.getItems().add(car);
+        }
         carModelChoiceBox.setValue("Choose car");
         
-        trackChoiceBox.getItems().addAll("Redbull Ring, Austria","Nürburgring, Germany", "Spa-Francorchamps, Belgium");
+        for(TrackEnum track: TrackEnum.values()){
+            trackChoiceBox.getItems().add(track);
+        }
         trackChoiceBox.setValue("Choose track");
         
         PrimaryChecker checker = new PrimaryChecker(model,this);
@@ -129,18 +135,15 @@ public class PrimaryController {
     public void update(){
         Object carChoice = carModelChoiceBox.getSelectionModel().getSelectedItem();
         if(carChoice.equals("Choose car")){
+            carNameText.setText("No car selected");
             carChosen = false;
+        }else{
+            CarEnum car = CarEnum.valueOf(carChoice.toString());
+            model.carChoice(car);
+            carChosen = true;
+            carNameText.setText(car.getName());
         }
-        if(carChoice.equals("Ferrari F1 car")){
-            model.carChoice(CarEnum.FERRARIF1);
-            carChosen = true;
-        }if(carChoice.equals("RedBull F1 car")){
-            model.carChoice(CarEnum.REDBULLF1);
-            carChosen = true;
-        }if(carChoice.equals("BMW Road car")){
-            model.carChoice(CarEnum.BMWROADCAR);
-            carChosen = true;
-        }
+        
         speedText.setText(model.getCar().getTopSpeed()*3.6 + " km/h");
         double accelerationSeconds = (double)Math.round((100/3.6)/model.getCar().getAcceleration()*10)/10;
         double decelerationSeconds = (double)Math.round((100/3.6)/-model.getCar().getDeceleration()*10)/10;
@@ -152,23 +155,12 @@ public class PrimaryController {
         if(trackChoice.equals("Choose track")){
             trackChosen = false;
         }
-        if(trackChoice.equals("Redbull Ring, Austria")){
+        else{
+            TrackEnum track = TrackEnum.valueOf(trackChoice.toString());
             trackChosen = true;
-            model.trackChoice(TrackEnum.AUSTRIA);
-            trackInfoText.setText("Length: 4,318 km \nCorners: 10 ");
-            trackImageView.setImage(new Image("rbrLayout.png"));
-        }
-        if(trackChoice.equals("Spa-Francorchamps, Belgium")){
-            trackChosen = true;
-            model.trackChoice(TrackEnum.SPA);
-            trackInfoText.setText("Length: 7,004 km \nCorners: 20 \nCaution: this track (especially start line) isn't perfectly finished");
-            trackImageView.setImage(new Image("spaLayout.png"));
-        }
-        if(trackChoice.equals("Nürburgring, Germany")){
-            trackChosen = true;
-            model.trackChoice(TrackEnum.NURBURGRING);
-            trackInfoText.setText("Length: 5,148 km \nCorners: 15 \nCaution: this track hasn't been tested thoroughly");
-            trackImageView.setImage(new Image("nurburgringLayout.png"));
+            model.trackChoice(track);
+            trackInfoText.setText(track.getName() + "\nLength: " + track.getLength() + "\nCorners: " + track.getCorners());
+            trackImageView.setImage(track.getImg());
         }
     }
     public void buttonClick(ActionEvent e){
