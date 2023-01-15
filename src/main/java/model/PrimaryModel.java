@@ -40,7 +40,7 @@ public class PrimaryModel {
     
     
     public PrimaryModel() {
-        car = new Car(180, width, length, topSpeed, acceleration, deceleration, bulgeOutDeceleration, GasState.IDLE, SteerState.IDLE, img);
+        car = new Car(180, width, length, topSpeed, acceleration, deceleration, bulgeOutDeceleration, img);
         gameModel = new GameModel(car);
         trackModel = new TrackModel(svgCode, 0, 0, 0,0);
     }

@@ -34,8 +34,8 @@ public class Car {
     private double acceleration = 12; //acceleratie in m/s² (F1)
     private double deceleration = -60; //deceleratie in m/s² (F1)
     private double bulgeOutDeceleration = -5; //uitbolsnelheid in m/s;
-    private GasState gasState;
-    private SteerState steerState;
+    private GasState gasState = GasState.IDLE;
+    private SteerState steerState = SteerState.IDLE;
     
     //time-based vars
     private double elapsedTime;
@@ -52,21 +52,16 @@ public class Car {
      * @param acceleration acceleratie van auto (m/s2)
      * @param deceleration deceleratie van auto (m/s2)
      * @param bulgeOutDeceleration deceleratie van auto wanneer er niets gebeurd (m/s2)
-     * @param gasState status van het gaspedaal
-     * @param steerState status van het stuur 
      * @param carimg foto van auto
      */
-    public Car(double degrees, int width, int length, double topSpeed, double acceleration,double deceleration,double bulgeOutDeceleration,GasState gasState, SteerState steerState, Image carimg) {
+    public Car(double degrees, int width, int length, double topSpeed, double acceleration,double deceleration,double bulgeOutDeceleration, Image carimg) {
         this.width = width;
         this.length = length;
         this.degrees = degrees;
-        //set-once vars
         this.topSpeed = topSpeed;
         this.acceleration = acceleration;
         this.deceleration = deceleration;
         this.bulgeOutDeceleration = bulgeOutDeceleration;
-        this.gasState = gasState;
-        this.steerState = steerState;
         this.img = carimg;
     }
     
