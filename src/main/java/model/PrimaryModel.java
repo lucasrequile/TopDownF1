@@ -25,7 +25,6 @@ import model.CarEnum;
  * @author Lucas Requilé
  */
 public class PrimaryModel {
-    private CarEnum carModel;
     private Car car;
     private int width = 2;
     private int length = 5;

@@ -26,7 +26,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -123,6 +122,7 @@ public class PrimaryController {
         for(TrackEnum track: TrackEnum.values()){
             trackChoiceBox.getItems().add(track);
         }
+        //trackChoiceBox.getItems().addAll(TrackEnum.values()); Zou ook zo kunnen, maar is netbeans niet gelukkig mee
         trackChoiceBox.setValue("Choose track");
         
         PrimaryChecker checker = new PrimaryChecker(model,this);
