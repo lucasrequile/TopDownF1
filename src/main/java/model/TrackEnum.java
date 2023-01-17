@@ -20,6 +20,8 @@ import javafx.scene.image.Image;
 
 /**
  *
+ * Inspiratie voor dit soort ENUM:
+ * https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html
  * @author Lucas Requilé
  */
 public enum TrackEnum {

@@ -25,7 +25,6 @@ public class GameModel {
     private double laptime;
     private double bestLap = 59999;
     private int laps;
-    private boolean isOnFinish = false;
     private long endTime;
     private long startTime;
     private double elapsedTime;

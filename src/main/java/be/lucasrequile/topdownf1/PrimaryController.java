@@ -38,6 +38,7 @@ import model.TrackEnum;
 public class PrimaryController {
     private final Stage stage;
     public PrimaryController() {
+        //geadapteerd vanuit https://stackoverflow.com/questions/35856668/mvc-with-multiple-controllers
         stage = new Stage();
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
@@ -159,7 +160,7 @@ public class PrimaryController {
             TrackEnum track = TrackEnum.valueOf(trackChoice.toString());
             trackChosen = true;
             model.trackChoice(track);
-            trackInfoText.setText(track.getName() + "\nLength: " + track.getLength() + "\nCorners: " + track.getCorners());
+            trackInfoText.setText(track.getName() + "\nLength: " + track.getLength() + " km\nCorners: " + track.getCorners());
             trackImageView.setImage(track.getImg());
         }
     }

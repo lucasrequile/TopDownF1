@@ -19,13 +19,16 @@ package model;
 import javafx.scene.image.Image;
 
 /**
- *
+ * Inspiratie voor dit soort ENUM:
+ * https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html
+ * 
  * @author Lucas Requilé
  */
 public enum CarEnum {
-    FERRARIF1("Ferrari F1-75",2,5,85,12,-60,-5,new Image("ferrariF1.png")),
-    REDBULLF1("Red Bull RB18",2,5,85,12,-60,-5,new Image("redbullcar.png")),
-    BMWROADCAR("BMW M8",2,5,70,7,-40,-5,new Image("BMWM8.png"));
+    FERRARI_F1_75("Ferrari F1-75",2,5,85,12,-60,-5,new Image("ferrariF1.png")),
+    REDBULL_RB18("Red Bull RB18",2,5,85,12,-60,-5,new Image("redbullcar.png")),
+    BMW_M8("BMW M8 Competition Grand Coupé",2,5,70,7,-40,-5,new Image("BMWM8.png")),
+    FORMULA_E("Formula E Gen. 3", 2, 5, 84, 11.5,-50,-5, new Image("FormulaEGen3.png"));
     
     private final String name;
     private final int width;
@@ -77,5 +80,4 @@ public enum CarEnum {
     public Image getImg() {
         return img;
     }
-    
 }

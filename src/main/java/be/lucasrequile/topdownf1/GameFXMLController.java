@@ -60,20 +60,8 @@ public class GameFXMLController {
     private Text speedText;
 
     @FXML
-    private Text staticTextLapTime;
-
-    @FXML
-    private Text staticTextSpeed;
-    
-    @FXML
-    private Text staticTextLap;
-    
-    @FXML
     private Text lapText;
-    
-    @FXML
-    private Text staticTextBestLap;
-     
+
     @FXML
     private Text bestLapTimeText;
     
@@ -87,7 +75,6 @@ public class GameFXMLController {
     
     private boolean isGasPressed = false;
     private boolean isSteered = false;
-    private int size;
     private final PrimaryController primaryController;
     private Stage stage;
     
