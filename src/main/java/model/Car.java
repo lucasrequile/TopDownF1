@@ -36,8 +36,6 @@ public class Car {
     private double bulgeOutDeceleration = -5; //uitbolsnelheid in m/s;
     private GasState gasState = GasState.IDLE;
     private SteerState steerState = SteerState.IDLE;
-    
-    //time-based vars
     private double elapsedTime;
     private long startTime;
     private long endTime;

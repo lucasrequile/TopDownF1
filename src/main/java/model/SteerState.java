@@ -21,5 +21,5 @@ package model;
  * @author Lucas Requilé
  */
 public enum SteerState {
-    LEFT,RIGHT, IDLE;
+    LEFT,RIGHT,IDLE;
 }
